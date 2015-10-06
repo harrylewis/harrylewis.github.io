@@ -1,0 +1,3528 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+			<meta name="apple-mobile-web-app-capable" content="yes" />
+			<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+			<link type="text/css" rel="stylesheet" href="css/prototype.css">
+			<link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon-114x114-precomposed.png">
+			<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+			<script type="text/javascript" src="js/center.jQuery.js"></script>
+			<script type="text/javascript">
+			
+				$(function() {
+					
+					$('li:nth-child(3)').click(function() {
+						var div = "<div class='create'></div>";
+						$('#feed').append(div);
+						$('.create').center();
+					});
+					
+					$(window).on('touchmove', function() {
+				            
+				            if ($(this).scrollTop() >= 200) {
+				            
+				                $('header.profilehead').css({
+				                	'top' : '-5em',
+				                	'-webkit-box-shadow' : 'none',
+				                	'-moz-box-shadow' : 'none',
+				                	'box-shadow' : 'none',
+				                	'display' : 'none'
+				                });
+				            
+				            } else {
+				            
+				                $('header.profilehead').css({
+				                	'position' : 'fixed',
+				                	'top' : '0',
+				                	'-webkit-box-shadow' : '0px 2px 0px rgba(200, 200, 200, 0.75)',
+				                	'-moz-box-shadow' : '0px 2px 0px rgba(200, 200, 200, 0.75)',
+				                	'box-shadow' : '0px 2px 0px rgba(200, 200, 200, 0.75)',
+				                	'display' : 'block'
+				                	
+				                });
+				            
+				            }
+				            
+				            // move this inside profile tab part
+				            
+				            
+					        
+				    });
+				    
+				    
+				    // controlling the tabs on profile pages
+				    $('div[slide]').each(function() {
+				    
+				    	var currentSlide = $(this).attr('slide');
+				    
+				    	// changing regular fixed div to profile fixed div
+				    	$(window).on('touchmove', function() {
+					    	
+					    	if ( $(this).scrollTop() >= 250 ) {
+						    	
+						    	$('div[slide="' + currentSlide + '"]').find('nav.profilenav').css({
+							    	'position' : 'fixed',
+							    	'top' : '0'
+						    	});
+						    	
+						    	$('div[slide="' + currentSlide + '"]').find('.profile .feed, .profile .posts, .profile .about').css({
+							    	'top' : '4.15em'
+						    	});
+						    	
+						    	// activating stats footer based on if active tab is stats
+						    	if ( $('div[slide="' + currentSlide + '"]').find('.active').text() == 'Stats' ) {
+						    	
+						    		$('div[slide="' + currentSlide + '"]').find('footer').css({
+							    		'bottom' : '0',
+							            'display' : 'block'
+						    		});
+						    	
+							    } else if ( $('div[slide="' + currentSlide + '"]').find('.active').text() == 'About' ) {
+						            
+						            	$('div[slide="' + currentSlide + '"]').find('footer').css({
+							                'bottom' : '-100%',
+							                'display' : 'none'
+						                });
+						            
+						        } else if ( $('div[slide="' + currentSlide + '"]').find('.active').text() == 'Posts' ) {
+						            
+						            	$('div[slide="' + currentSlide + '"]').find('footer').css({
+							                'bottom' : '-100%',
+							                'display' : 'none'
+						                });
+						            
+						        }
+						    	
+					    	} else {
+						    	
+						    	$('div[slide="' + currentSlide + '"]').find('nav.profilenav').css({
+							    	'position' : 'relative'
+						    	});
+						    	
+						    	$('div[slide="' + currentSlide + '"]').find('.profile .feed, .profile .posts, .profile .about').css({
+							    	'top' : '0em'
+						    	});
+						    	
+						    	$('div[slide="' + currentSlide + '"]').find('footer').css({
+							            'bottom' : '-100%',
+							            'display' : 'none'
+						            });
+						    	
+					    	}
+					    	
+				    	});
+					    
+				    
+				    if ( $(this).find('.active').text() == 'Stats' ) {
+						   
+					   $(this).find('.profile .feed').show();
+					   $(this).find('.profile .about, .profile .posts').hide();
+						   
+					}
+					
+						 $('li.profilenav a').on('click touchstart', function(e) {
+						   
+						   e.preventDefault();
+						   $(this).parent().siblings().find('.active').removeClass('active');
+						   $(this).addClass('active');
+						   
+						   if ( $(this).text() == 'Stats' ) {
+							   
+							   $(this).closest('div[slide]').find('.profile .feed').show();
+							  // $('html, body').animate({ scrollTop : 250 }, 1);
+							   $(this).closest('div[slide]').find('.profile .about, .profile .posts').hide();
+							   
+							/*   if ( $(window).scrollTop() >= 250 ) {
+								   
+								   
+								   
+							   } else {
+								   
+							   }*/
+							   
+							   
+						   } else if ( $(this).text() == 'About' ) {
+							   
+							   $(this).closest('div[slide]').find('.profile .about').show();
+							   $(this).closest('div[slide]').find('.profile .feed, .profile .posts').hide();
+							   
+							   $(this).closest('div[slide]').find('footer').css({
+							   		'bottom' : '-100%',
+							   		'display' : 'none'
+						       });
+							   
+						   } else if ( $(this).text() == 'Posts' || $(this).text() == 'Leaders' ) {
+							   
+							   $(this).closest('div[slide]').find('.profile .posts').show();
+							   $(this).closest('div[slide]').find('.profile .feed, .profile .about').hide();
+							   
+							   $(this).closest('div[slide]').find('footer').css({
+							   		'bottom' : '-100%',
+							   		'display' : 'none'
+						       });
+							   
+						   } else {
+							   
+							   $(this).closest('div[slide]').find('.profile .feed').show();
+							   $(this).closest('div[slide]').find('.profile .about, .profile .posts').hide();
+							  						   
+						   }
+						    
+					    });
+					
+					});
+				    
+				    $('.options').on('click touchstart', function() {
+					   
+					   $('li.headnav').hide();
+					   $('.headnavopt').show(0.00001);
+					   $('header.homehead').css({
+						   'height' : 'auto',
+						   '-webkit-box-shadow' : 'none',
+						   '-moz-box-shadow' : 'none',
+						   'box-shadow' : 'none'
+					   });
+					    
+				    });
+				    
+				    $('.cancel').on('click touchstart', function() {
+					    
+					   $('li.headnav').show();
+					   $('header.homehead').css({
+						   'height' : '5em',
+						   '-webkit-box-shadow' : '0px 2px 0px rgba(200, 200, 200, 0.75)',
+						   '-moz-box-shadow' : '0px 2px 0px rgba(200, 200, 200, 0.75)',
+						   'box-shadow' : '0px 2px 0px rgba(200, 200, 200, 0.75)'
+					   });
+					   $('.headnavopt').hide();
+					    
+				    });
+				    
+				    // gets rid of right span on user associations section if no number is present
+				    
+				    $('.about .assoc .piece .right').each(function() {
+					   
+					   if ( $(this).text() == '' ) {
+						   
+						   $(this).hide();
+						   $(this).siblings('.left').css({
+							   'width' : '100%',
+							   'max-width' : '100%'
+						   });
+						   
+					   } else {
+						   
+						   $(this).show();
+						   $(this).siblings('.left').css({
+							   'width' : '82%',
+							   'max-width' : '82%'
+						   });
+						   
+					   }
+					    
+				    });
+				    
+				    // responsible for changing to different slides based on anchor clicks
+				    
+				    $('div[slide="1"], div[slide="2"], div[slide="3"], div[slide="4"], div[slide="5"], div[slide="6"], div[slide="7"], div[slide="8"], div[slide="9"], div[slide="10"], div[slide="11"], div[slide="12"]').css( 'left' , '-100%');
+		
+					$('a').on('click', function(e) {
+						
+						e.preventDefault();
+						var slideNum = $(this).attr('slidenum');
+						
+						if ( slideNum === '2' ) {
+							
+							$(window).scrollTop(0);
+							$('div[slide="2"]').css( 'z-index', '10' ).css({ 'left' : '0', 'display' : 'block' }); // animate({ left : '0%' }, 100, function() {});
+							var current = $(this).closest('div[slide]').attr('slide');
+							$('div[slide="' + current + '"]').css({ 
+								'left' : '-100%',
+								'z-index' : '5',
+								'display' : 'none'
+							});
+							
+						} else if ( slideNum === '1' ) {
+							
+							$(window).scrollTop(0);
+							$('div[slide="1"]').css( 'z-index', '10' ).css({ 'left' : '0', 'display' : 'block' }); // animate({ left : '0%' }, 100, function() {});
+							var current = $(this).closest('div[slide]').attr('slide');
+							$('div[slide="' + current + '"]').css({ 
+								'left' : '-100%',
+								'z-index' : '5',
+								'display' : 'none'
+							});
+							
+						} else if ( slideNum === '3' ) {
+							
+							$(window).scrollTop(0);
+							$('div[slide="3"]').css( 'z-index', '10' ).css({ 'left' : '0', 'display' : 'block' }); // animate({ left : '0%' }, 100, function() {});
+							var current = $(this).closest('div[slide]').attr('slide');
+							$('div[slide="' + current + '"]').css({ 
+								'left' : '-100%',
+								'z-index' : '5',
+								'display' : 'none'
+							});
+							
+						} else if ( slideNum === '4' ) {
+							
+							$(window).scrollTop(0);
+							$('div[slide="4"]').css( 'z-index', '10' ).css({ 'left' : '0', 'display' : 'block' }); // animate({ left : '0%' }, 100, function() {});
+							var current = $(this).closest('div[slide]').attr('slide');
+							$('div[slide="' + current + '"]').css({ 
+								'left' : '-100%',
+								'z-index' : '5',
+								'display' : 'none'
+							});
+							
+						} else if ( slideNum === '5' ) {
+							
+							$(window).scrollTop(0);
+							$('div[slide="5"]').css( 'z-index', '10' ).css({ 'left' : '0', 'display' : 'block' }); // animate({ left : '0%' }, 100, function() {});
+							var current = $(this).closest('div[slide]').attr('slide');
+							$('div[slide="' + current + '"]').css({ 
+								'left' : '-100%',
+								'z-index' : '5',
+								'display' : 'none'
+							});
+							
+						} else if ( slideNum === '6' ) {
+							
+							$(window).scrollTop(0);
+							$('div[slide="6"]').css( 'z-index', '10' ).css({ 'left' : '0', 'display' : 'block' }); // animate({ left : '0%' }, 100, function() {});
+							var current = $(this).closest('div[slide]').attr('slide');
+							$('div[slide="' + current + '"]').css({ 
+								'left' : '-100%',
+								'z-index' : '5',
+								'display' : 'none'
+							});
+							
+						} else if ( slideNum === '7' ) {
+							
+							$(window).scrollTop(0);
+							$('div[slide="7"]').css( 'z-index', '10' ).css({ 'left' : '0', 'display' : 'block' }); // animate({ left : '0%' }, 100, function() {});
+							var current = $(this).closest('div[slide]').attr('slide');
+							$('div[slide="' + current + '"]').css({ 
+								'left' : '-100%',
+								'z-index' : '5',
+								'display' : 'none'
+							});
+							
+						} else if ( slideNum === '8' ) {
+							
+							$(window).scrollTop(0);
+							$('div[slide="8"]').css( 'z-index', '10' ).css({ 'left' : '0', 'display' : 'block' }); // animate({ left : '0%' }, 100, function() {});
+							var current = $(this).closest('div[slide]').attr('slide');
+							$('div[slide="' + current + '"]').css({ 
+								'left' : '-100%',
+								'z-index' : '5',
+								'display' : 'none'
+							});
+							
+						} else if ( slideNum === '9' ) {
+							
+							$(window).scrollTop(0);
+							$('div[slide="9"]').css( 'z-index', '10' ).css({ 'left' : '0', 'display' : 'block' }); // animate({ left : '0%' }, 100, function() {});
+							var current = $(this).closest('div[slide]').attr('slide');
+							$('div[slide="' + current + '"]').css({ 
+								'left' : '-100%',
+								'z-index' : '5',
+								'display' : 'none'
+							});
+							
+						} else if ( slideNum === '10' ) {
+							
+							$(window).scrollTop(0);
+							$('div[slide="10"]').css( 'z-index', '10' ).css({ 'left' : '0', 'display' : 'block' }); // animate({ left : '0%' }, 100, function() {});
+							var current = $(this).closest('div[slide]').attr('slide');
+							$('div[slide="' + current + '"]').css({ 
+								'left' : '-100%',
+								'z-index' : '5',
+								'display' : 'none'
+							});
+							
+						} else if ( slideNum === '11' ) {
+							
+							$(window).scrollTop(0);
+							$('div[slide="11"]').css( 'z-index', '10' ).css({ 'left' : '0', 'display' : 'block' }); // animate({ left : '0%' }, 100, function() {});
+							var current = $(this).closest('div[slide]').attr('slide');
+							$('div[slide="' + current + '"]').css({ 
+								'left' : '-100%',
+								'z-index' : '5',
+								'display' : 'none'
+							});
+							
+						}
+						
+					});
+					
+					// create
+					$('div[slide="0"] section').center();
+					
+					$('.new').on('click', function() {
+						
+						$('div[slide="0"]').css( 'display' , 'block' );
+						$('div[slide="0"]').animate({
+							top : '0'
+						}, 500, function() {});
+						
+					});
+					
+					$('div[slide="0"]').on('click', function() {
+						
+						$('div[slide="0"]').animate({
+							top : '-100%'
+						}, 500, function() {});
+						$('div[slide="0"]').css( 'display' , 'none' );
+						
+					});
+					
+					// sign up goes to home screen
+					$('div[slide="01"] input[type="submit"]').css( 'color' , 'rgb(60,60,60)' );
+					
+					$('div[slide="01"] input[type="submit"]').click(function(e) {
+						
+						e.preventDefault();
+						$('div[slide="1"]').css( 'z-index', '10' ).css({ 'left' : '0', 'display' : 'block' }); // animate({ left : '0%' }, 100, function() {});
+						var current = $(this).closest('div[slide]').attr('slide');
+						$('div[slide="' + current + '"]').css({ 
+							'left' : '-100%',
+							'z-index' : '5',
+							'display' : 'none'
+						});
+						
+					});
+					
+				
+	$('.orientation').click(function() {
+							$(window).scrollTop(0);
+							$('div[slide="12"]').css( 'z-index', '10' ).css({ 'left' : '0', 'display' : 'block' }); // animate({ left : '0%' }, 100, function() {});
+							var current = $(this).closest('div[slide]').attr('slide');
+							$('div[slide="' + current + '"]').css({ 
+								'left' : '-100%',
+								'z-index' : '5',
+								'display' : 'none'
+							});
+							
+						
+					});
+					
+					function readDeviceOrientation() {
+                 		
+					    if (Math.abs(window.orientation) === 90) {
+					        // Landscape
+					        var wW = $(window).width();
+					        var wH = $(window).height();
+					        $('div[slide="12"]').css( 'display' , 'none' );
+					        $('.rink').css({
+					        	'display' : 'inline-block',
+					        	'width' : wW,
+					        	'height' : wH
+					        });
+					    } else {
+					    	$('div[slide="12"]').css( 'display' , 'block' );
+					        $('.rink').css( 'display' , 'none' );
+					    }
+					}
+					
+					window.onorientationchange = readDeviceOrientation;
+
+						
+				});
+			
+			</script>
+		</head>
+		<body>
+		
+		<div slide="0">
+			<section>
+				<ul class="new">
+					<li class="new">Create Game</li>
+					<li class="new top">Create Team</li>
+					<li class="new top">Create League</li>
+				</ul>
+			</section>
+		</div>
+		
+		<div slide="01">
+			<img src="images/logofour.png" />
+			<h1>Scorbit</h1>
+					
+			<section>
+						
+				<input type="text" placeholder="Username" spellcheck="false" />
+				<input type="email" placeholder="Email" spellcheck="false" />
+				<input type="password" placeholder="Password" spellcheck="false" />
+						
+			</section>
+					
+			<input type="submit" value="Sign Up" />
+			
+		</div>
+		
+		<div slide="1">
+		
+			<header class="homehead">
+				<nav class="headnav">
+					<ul class="headnav">
+						<li class="headnav"><a href="#" slidenum="2">&#xe000;</a></li>
+						<li class="headnav options">Nearby</li>
+						<li class="headnav"><a href="#" class="new">&#xe001;</a></li>
+						<li class="headnavopt"><input type="text" placeholder="Search..." /></li>
+						<li class="headnavopt">Nearby</li>
+						<li class="headnavopt">What's Hot</li>
+						<li class="headnavopt">Following</li>
+						<li class="headnavopt">Leagues</li>
+						<li class="headnavopt">Teams</li>
+						<li class="headnavopt cancel"></li>
+					</ul>
+				</nav>
+			</header>
+			
+			<div class="feed">
+				
+				<section class="post game clearfix orientation">
+				
+					<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="9"><img src="images/titans.png" /></a></span>
+						<span class="score">4</span>
+						<span class="user clearfix"><h1>Toronto Titans</h1><h3>@toronto_titans</h3></span>
+					</div>
+					<div class="right">
+						<span class="avatar"><a href="#" slidenum="5"><img src="images/donmills.png" /></a></span>
+						<span class="score">1</span>
+						<span class="user clearfix"><h1>Don Mills Flyers</h1><h3>@donmillsflyers</h3></span>
+					</div>
+					
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@harrylewis</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="8"><img src="images/manolescu.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Jake De Maeyer</h1><h3>@jake_maeyer</h3></span>
+						<p>Scored a goal at 2:26 in the 3rd vs <a href="#" slidenum="5">@donmillsflyers</a></p>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@michaelbunting</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+						<p>Hit <a href="#" slidenum="7">@mark_mano</a> at 10:10 in the 3rd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+	
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">Sponsored Post</span></div>
+					<div class="left">
+						<span class="avatar ct"><a href="#" slidenum="4"><img src="images/SCOTIA-LOGO.jpg" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Scotiabank</h1></span>
+						<p>Come participate in Hockey Day in Canada.
+							<img src="images/images.jpeg" />
+						</p>
+					</div>
+	
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@_marcobozzo</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+						<p>Shot on <a href="#" slidenum="7">@mark_mano</a> at 13:00 in the 3rd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+	
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@jake_maeyer</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="3"><img src="images/bunting.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Michael Bunting</h1><h3>@michaelbun...</h3></span>
+						<p>Received a 1 game suspension for a hit from behind at 18:34 in the 3rd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+				
+				</section>
+				
+				<section class="post game clearfix">
+				
+					<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="5"><img src="images/donmills.png" /></a></span>
+						<span class="score">3</span>
+						<span class="user clearfix"><h1>Don Mills Flyers</h1><h3>@donmillsflyers</h3></span>
+					</div>
+					<div class="right">
+						<span class="avatar"><a href="#" slidenum="9"><img src="images/titans.png" /></a></span>
+						<span class="score">2</span>
+						<span class="user clearfix"><h1>Toronto Titans</h1><h3>@toronto_titans</h3></span>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="6"><img src="images/bozzo.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Marco Bozzo</h1><h3>@_marcobozzo</h3></span>
+						<p>Scored a goal at 18:56 in the 3rd vs <a href="#" slidenum="5">@donmillsflyers</a></p>
+						<span class="assists">assisted by</span>
+						<span class="avatar assist"><a href="#" slidenum="8"><img src="images/manolescu.png" /></a></span>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@michaelbunting</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="2"><img src="images/joe.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Joseph Iantorno</h1><h3>@joetorno</h3></span>
+						<p>Received a 1 game suspension for unsportsmanlike conduct at 0:29 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+				
+				</section>
+
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">Sponsored Post</span></div>
+					<div class="left">
+						<span class="avatar ct"><a href="#" slidenum="4"><img src="images/Unknown-1.jpeg" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Canadian Tire</h1></span>
+						<p>Canadian Tire Hockey School.
+							<img src="images/img.jpeg" />
+						</p>
+					</div>
+	
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+						<p>Scored a goal at 5:02 in the 2nd vs <a href="#" slidenum="9">@toronto_titans</a></p>
+						<span class="assists">assisted by</span>
+						<span class="avatar assist"><a href="#" slidenum="3"><img src="images/bunting.png" /></a></span><span class="avatar assist"><a href="#" slidenum="11"><img src="images/avatar.png" /></a></span>
+
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@_marcobozzo</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="8"><img src="images/manolescu.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Jake De Maeyer</h1><h3>@jake_maeyer</h3></span>
+						<p>Hit <a href="#" slidenum="3">@michaelbunting</a> at 10:01 in the 2nd vs. <a href="#" slidenum="5">@donmillsflyers</a></p>
+					</div>
+	
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="3"><img src="images/bunting.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Michael Bunting</h1><h3>@michaelbun...</h3></span>
+						<p>Took a tripping penalty at 10:56 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="8"><img src="images/manolescu.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Jake De Maeyer</h1><h3>@jake_maeyer</h3></span>
+						<p>Scored a goal at 12:57 in the 2nd vs <a href="#" slidenum="5">@donmillsflyers</a></p>
+						<span class="assists">assisted by</span>
+						<span class="avatar assist"><a href="#" slidenum="7"><img src="images/maeyer.png" /></a></span>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@jake_maeyer</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+						<p>Hit <a href="#" slidenum="6">@_marcobozzo</a> at 14:41 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+	
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@harrylewis</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="3"><img src="images/bunting.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Michael Bunting</h1><h3>@michaelbun...</h3></span>
+						<p>Took a roughing penalty at 1:23 in the 1st vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="8"><img src="images/manolescu.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Jake De Maeyer</h1><h3>@jake_maeyer</h3></span>
+						<p>Scored a goal at 1:51 in the 1st vs <a href="#" slidenum="5">@donmillsflyers</a></p>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@maxfurs</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="6"><img src="images/bozzo.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Marco Bozzo</h1><h3>@_marcobozzo</h3></span>
+						<p>Took the puck away from <a href="#">@harrylewis</a> at 14:14 in the 1st vs. <a href="#" slidenum="5">@donmillsflyers</a></p>
+					</div>
+	
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@joetorno</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+						<p>Hit <a href="#" slidenum="6">@_marcobozzo</a> at 16:15 in the 1st vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+	
+				</section>
+		
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@harrylewis</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="2"><img src="images/joe.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Joseph Iantorno</h1><h3>@joetorno</h3></span>
+						<p>Took a too many men on the ice penalty at 3:45 in the 3rd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="3"><img src="images/bunting.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Michael Bunting</h1><h3>@michaelbun...</h3></span>
+						<p>Scored a goal at 4:52 in the 3rd vs <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@mark_mano</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="6"><img src="images/bozzo.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Marco Bozzo</h1><h3>@_marcobozzo</h3></span>
+						<p>Scored a goal at 5:38 in the 3rd vs <a href="#" slidenum="5">@donmillsflyers</a></p>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@michaelbunting</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="8"><img src="images/manolescu.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Jake De Maeyer</h1><h3>@jake_maeyer</h3></span>
+						<p>Shot on <a href="#">@evan_morse</a> at 8:18 in the 3rd vs. <a href="#" slidenum="5">@donmmillsflyers</a></p>
+					</div>
+	
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@harrylewis</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="7"><img src="images/maeyer.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Mark Manolescu</h1><h3>@mark_mano</h3></span>
+						<p>Took a slashing penalty at 18:03 in the 3rd vs. <a href="#" slidenum="5">@donmillsflyers</a></p>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="11"><img src="images/avatar.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Harry Lewis</h1><h3>@harrylewis</h3></span>
+						<p>Scored a goal at 0:01 in the 2nd vs <a href="#" slidenum="9">@toronto_titans</a></p>
+						<span class="assists">assisted by</span>
+						<span class="avatar assist"><a href="#" slidenum="3"><img src="images/bunting.png" /></a></span>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@jake_maeyer</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+						<p>Hit <a href="#" slidenum="6">@_marcobozzo</a> at 0:01 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+	
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@michaelbunting</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+						<p>Shot on <a href="#">@mark_mano</a> at 0:12 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+	
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@jake_maeyer</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="11"><img src="images/avatar.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Harry Lewis</h1><h3>@harrylewis</h3></span>
+						<p>Hit <a href="#" slidenum="6">@_marcobozzo</a> at 3:15 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+	
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@_marcobozzo</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="11"><img src="images/avatar.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Harry Lewis</h1><h3>@harrylewis</h3></span>
+						<p>Took a slashing penalty at 8:07 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@michaelbunting</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="7"><img src="images/maeyer.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Mark Manolescu</h1><h3>@mark_mano</h3></span>
+						<p>Took a fighting penalty at 0:10 in the 1st vs. <a href="#" slidenum="5">@donmillsflyers</a></p>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@markmano</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="6"><img src="images/bozzo.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Marco Bozzo</h1><h3>@_marcobozzo</h3></span>
+						<p>Scored a goal at 3:40 in the 1st vs <a href="#" slidenum="5">@donmillsflyers</a></p>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="3"><img src="images/bunting.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Michael Bunting</h1><h3>@michaelbun...</h3></span>
+						<p>Scored a goal at 10:00 in the 1st vs <a href="#" slidenum="9">@toronto_titans</a></p>
+						<span class="assists">assisted by</span>
+						<span class="avatar assist"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span><span class="avatar assist"><a href="#" slidenum="11"><img src="images/avatar.png" /></a></span>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@_marcobozzo</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="8"><img src="images/manolescu.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Jake De Maeyer</h1><h3>@jake_maeyer</h3></span>
+						<p>Shot on <a href="#">@evan_morse</a> at 10:03 in the 1st vs. <a href="#" slidenum="5">@donmillsflyers</a></p>
+					</div>
+	
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@_marcobozzo</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="3"><img src="images/bunting.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Michael Bunting</h1><h3>@michaelbun...</h3></span>
+						<p>Shot on <a href="#" slidenum="7">@mark_mano</a> at 13:15 in the 1st vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+	
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@harrylewis</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+						<p>Hit <a href="#" slidenum="8">@jake_maeyer</a> at 14:48 in the 1st vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+	
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@michaelbunting</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="11"><img src="images/avatar.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Harry Lewis</h1><h3>@harrylewis</h3></span>
+						<p>Took a high-sticking penalty at 14:56 in the 1st vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+				
+				</section>
+			
+				<section class="post game clearfix">
+				
+					<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="5"><img src="images/donmills.png" /></a></span>
+						<span class="score">3</span>
+						<span class="user clearfix"><h1>Don Mills Flyers</h1><h3>@donmillsflyers</h3></span>
+					</div>
+					<div class="right">
+						<span class="avatar"><a href="#" slidenum="9"><img src="images/titans.png" /></a></span>
+						<span class="score">2</span>
+						<span class="user clearfix"><h1>Toronto Titans</h1><h3>@toronto_titans</h3></span>
+					</div>
+				
+				</section>
+				
+			</div>
+			
+		</div>
+			
+		<div slide="11">
+			
+				<!-- HEADER -->
+
+				<header class="profilehead">
+					<nav class="headnav">
+						<ul class="headnav">
+							<li class="headnav"><a href="#" slidenum="1">&#xe011;</a></li>
+							<li class="headnav">Harry Lewis</li>
+							<li class="headnav"><a href="#" class="new">&#xe001;</a></li>
+						</ul>
+					</nav>
+				</header>
+				
+				<div class="profile">
+					
+				<!-- COVER PHOTO AVATAR SECTION -->
+			
+				<section class="cover">
+					<span class="avatar"><img class="makeSmall" src="images/avatar.png" /></span>
+					<span class="user clearfix"><h1>Harry Lewis</h1><h3>@harrylewis</h3></span>
+				</section>
+						
+				<!-- STATS, INFO, AND POSTS SECTION -->
+					
+				<section class="info">
+							
+					<nav class="profilenav">
+						<ul class="profilenav clearfix">
+							<li class="profilenav"><a href="#" class="active">Stats</a></li>
+							<li class="profilenav"><a href="#">About</a></li>
+							<li class="profilenav"><a href="#">Posts</a></li>
+						</ul>
+					</nav>
+					
+					<footer>
+						<nav class="statsnav">
+							<ul class="statsnav clearfix">
+								<li class="statsnav"><label>SEASON</label>12/13</li>
+								<li class="statsnav team"><span class="avatar"><img src="images/donmills.png" /></span></li>
+								<ul class="statistics clearfix">
+									<li class="statsnav"><label>GP</label>49</li>
+									<li class="statsnav"><label>G</label>23</li>
+									<li class="statsnav"><label>A</label>18</li>
+									<li class="statsnav"><label>P</label>41</li>
+									<li class="statsnav"><label>PIM</label>16</li>
+								<!--	<li class="statsnav"><label>+/-</label>4</li>
+									<li class="statsnav"><label>HITS</label>40</li>-->
+								</ul>
+							</ul>
+						</nav>
+					</footer>
+						
+					<div class="feed">
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/avatar.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Harry Lewis</h1><h3>@harrylewis</h3></span>
+								<p>Scored a goal at 0:01 in the 2nd vs <a href="#" slidenum="9">@toronto_titans</a></p>
+								<span class="assists">assisted by</span>
+								<span class="avatar assist"><a href="#" slidenum="3"><img src="images/bunting.png" /></a></span>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@jake_maeyer</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/avatar.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Harry Lewis</h1><h3>@harrylewis</h3></span>
+								<p>Hit <a href="#" slidenum="6">@_marcobozzo</a> at 3:15 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+			
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@_marcobozzo</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/avatar.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Harry Lewis</h1><h3>@harrylewis</h3></span>
+								<p>Took a slashing penalty at 8:07 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@michaelbunting</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/avatar.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Harry Lewis</h1><h3>@harrylewis</h3></span>
+								<p>Took a high-sticking penalty at 14:56 in the 1st vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+						
+						</section>
+						
+					</div>
+							
+					<div class="about">
+							
+						<section class="section general">
+					
+							<!-- GENERAL SECTION -->				
+							<h1>General</h1>
+								<section class="post piece clearfix">
+										<span class="left">Hometown</span>
+										<span class="right">Toronto, ON</span>
+									</section>
+								<section class="post piece clearfix">
+										<span class="left">Height</span>
+										<span class="right">5'9"</span>
+									</section>
+								<section class="post piece clearfix">
+										<span class="left">Weight</span>
+										<span class="right">155 lbs</span>
+									</section>
+								<section class="post piece clearfix">
+										<span class="left">Date of Birth</span>
+										<span class="right">10/11/94</span>
+								</section>
+								<section class="post piece clearfix">
+										<span class="left">School</span>
+										<span class="right">Queen's University</span>
+								</section>
+								<section class="post piece clearfix">
+										<span class="left">SAT</span>
+										<span class="right">1920</span>
+								</section>
+		
+						</section>
+						<section class="section assoc">
+								
+							<!-- ASSOCIATIONS -->
+							<h1>Associations</h1>
+								<section class="post piece clearfix">
+									<span class="left">Player for <a href="#" slidenum="5">Don Mills Flyers Midget AAA</a></span>
+									<span class="right">#89</span>
+								</section>
+								<section class="post piece clearfix">
+									<span class="left">Coach for <a href="#" slidenum="9">Toronto Titans Midget AAA</a></span>
+									<span class="right"></span>
+								</section>
+		
+						</section>		
+						<section class="section">
+								
+							<section class="post piece clearfix">
+								<span class="left">423 Followers</span>
+							</section>
+		
+						</section>
+							
+					</div>
+							
+					<div class="posts">
+					
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@harrylewis</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="8"><img src="images/manolescu.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Jake De Maeyer</h1><h3>@jake_maeyer</h3></span>
+								<p>Scored a goal at 2:26 in the 3rd vs <a href="#" slidenum="5">@donmillsflyers</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@harrylewis</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="3"><img src="images/bunting.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Michael Bunting</h1><h3>@michaelbun...</h3></span>
+								<p>Took a roughing penalty at 1:23 in the 1st vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@harrylewis</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="2"><img src="images/joe.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Joseph Iantorno</h1><h3>@joetorno</h3></span>
+								<p>Took a too many men on the ice penalty at 3:45 in the 3rd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@harrylewis</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="7"><img src="images/maeyer.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Mark Manolescu</h1><h3>@mark_mano</h3></span>
+								<p>Took a slashing penalty at 18:03 in the 3rd vs. <a href="#" slidenum="5">@donmillsflyers</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@harrylewis</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+								<p>Hit <a href="#">@jake_maeyer</a> at 14:48 in the 1st vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+			
+						</section>						
+					
+					</div>			
+											
+				</section>
+								
+			</div>
+			
+			</div>
+		
+		<div slide="3">
+			
+				<!-- HEADER -->
+
+				<header class="profilehead">
+					<nav class="headnav">
+						<ul class="headnav">
+							<li class="headnav"><a href="#" slidenum="1">&#xe011;</a></li>
+							<li class="headnav">Michael Bunting</li>
+							<li class="headnav"><a href="#" class="new">&#xe001;</a></li>
+						</ul>
+					</nav>
+				</header>
+				
+				<div class="profile">
+					
+				<!-- COVER PHOTO AVATAR SECTION -->
+			
+				<section class="cover">
+					<span class="avatar"><img class="makeSmall" src="images/bunting.png" /></span>
+					<span class="user clearfix"><h1>Michael Bunting</h1><h3>@m_bunting</h3></span>
+				</section>
+						
+				<!-- STATS, INFO, AND POSTS SECTION -->
+					
+				<section class="info">
+							
+					<nav class="profilenav">
+						<ul class="profilenav clearfix">
+							<li class="profilenav"><a href="#" class="active">Stats</a></li>
+							<li class="profilenav"><a href="#">About</a></li>
+							<li class="profilenav"><a href="#">Posts</a></li>
+						</ul>
+					</nav>
+					
+					<footer>
+						<nav class="statsnav">
+							<ul class="statsnav clearfix">
+								<li class="statsnav"><label>SEASON</label>12/13</li>
+								<li class="statsnav team"><span class="avatar"><a href="#" slidenum="5"><img src="images/donmills.png" /></a></span></li>
+								<ul class="statistics clearfix">
+									<li class="statsnav"><label>GP</label>36</li>
+									<li class="statsnav"><label>G</label>29</li>
+									<li class="statsnav"><label>A</label>20</li>
+									<li class="statsnav"><label>P</label>49</li>
+									<li class="statsnav"><label>PIM</label>24</li>
+								<!--	<li class="statsnav"><label>+/-</label>4</li>
+									<li class="statsnav"><label>HITS</label>40</li>-->
+								</ul>
+							</ul>
+						</nav>
+					</footer>
+						
+					<div class="feed">
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@jake_maeyer</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/bunting.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Michael Bunting</h1><h3>@michaelbun...</h3></span>
+								<p>Received a 1 game suspension for a hit from behind at 18:34 in the 3rd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/bunting.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Michael Bunting</h1><h3>@michaelbun...</h3></span>
+								<p>Took a tripping penalty at 10:56 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@harrylewis</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/bunting.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Michael Bunting</h1><h3>@michaelbun...</h3></span>
+								<p>Took a roughing penalty at 1:23 in the 1st vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/bunting.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Michael Bunting</h1><h3>@michaelbun...</h3></span>
+								<p>Scored a goal at 4:52 in the 3rd vs <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/bunting.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Michael Bunting</h1><h3>@michaelbun...</h3></span>
+								<p>Scored a goal at 10:00 in the 1st vs <a href="#" slidenum="9">@toronto_titans</a></p>
+								<span class="assists">assisted by</span>
+								<span class="avatar assist"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span><span class="avatar assist"><a href="#" slidenum="11"><img src="images/avatar.png" /></a></span>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@_marcobozzo</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/bunting.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Michael Bunting</h1><h3>@michaelbun...</h3></span>
+								<p>Shot on <a href="#">@mark_mano</a> at 13:15 in the 1st vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+			
+						</section>
+										
+					</div>
+							
+					<div class="about">
+							
+						<section class="section general">
+					
+							<!-- GENERAL SECTION -->				
+							<h1>General</h1>
+								<section class="post piece clearfix">
+										<span class="left">Hometown</span>
+										<span class="right">Thornhill, ON</span>
+									</section>
+								<section class="post piece clearfix">
+										<span class="left">Height</span>
+										<span class="right">5'11"</span>
+									</section>
+								<section class="post piece clearfix">
+										<span class="left">Weight</span>
+										<span class="right">175 lbs</span>
+									</section>
+								<section class="post piece clearfix">
+										<span class="left">Date of Birth</span>
+										<span class="right">03/16/95</span>
+								</section>
+								<section class="post piece clearfix">
+										<span class="left">School</span>
+										<span class="right">Cardinal Leger</span>
+								</section>
+		
+						</section>
+						<section class="section assoc">
+								
+							<!-- ASSOCIATIONS -->
+							<h1>Associations</h1>
+								<section class="post piece clearfix">
+									<span class="left">Player for <a href="#" slidenum="5">Don Mills Flyers Midget AAA</a></span>
+									<span class="right">#27</span>
+								</section>
+		
+						</section>		
+						<section class="section">
+								
+							<section class="post piece clearfix">
+								<span class="left">394 Followers</span>
+							</section>
+		
+						</section>
+							
+					</div>
+							
+					<div class="posts">
+					
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@michaelbunting</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+								<p>Hit <a href="#" slidenum="7">@mark_mano</a> at 10:10 in the 3rd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+			
+						</section>
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@michaelbunting</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="2"><img src="images/joe.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Joseph Iantorno</h1><h3>@joetorno</h3></span>
+								<p>Received a 1 game suspension for unsportsmanlike conduct at 0:29 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@michaelbunting</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="8"><img src="images/manolescu.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Jake De Maeyer</h1><h3>@jake_maeyer</h3></span>
+								<p>Shot on <a href="#">@evan_morse</a> at 8:18 in the 3rd vs. <a href="#" slidenum="5">@donmmillsflyers</a></p>
+							</div>
+			
+						</section>
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@michaelbunting</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="7"><img src="images/maeyer.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Mark Manolescu</h1><h3>@mark_mano</h3></span>
+								<p>Took a fighting penalty at 0:10 in the 1st vs. <a href="#" slidenum="5">@donmillsflyers</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@michaelbunting</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="11"><img src="images/avatar.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Harry Lewis</h1><h3>@harrylewis</h3></span>
+								<p>Took a high-sticking penalty at 14:56 in the 1st vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+						
+						</section>
+					
+					</div>			
+											
+				</section>
+								
+			</div>
+			
+			</div>
+		
+		<div slide="4">
+			
+				<!-- HEADER -->
+
+				<header class="profilehead">
+					<nav class="headnav">
+						<ul class="headnav">
+							<li class="headnav"><a href="#" slidenum="1">&#xe011;</a></li>
+							<li class="headnav">Maxim Furs</li>
+							<li class="headnav"><a href="#" class="new">&#xe001;</a></li>
+						</ul>
+					</nav>
+				</header>
+				
+				<div class="profile">
+					
+				<!-- COVER PHOTO AVATAR SECTION -->
+			
+				<section class="cover">
+					<span class="avatar"><img class="makeSmall" src="images/maximfurs.png" /></span>
+					<span class="user clearfix"><h1>Maxim Furs</h1><h3>@_maximfurs</h3></span>
+				</section>
+						
+				<!-- STATS, INFO, AND POSTS SECTION -->
+					
+				<section class="info">
+							
+					<nav class="profilenav">
+						<ul class="profilenav clearfix">
+							<li class="profilenav"><a href="#" class="active">Stats</a></li>
+							<li class="profilenav"><a href="#">About</a></li>
+							<li class="profilenav"><a href="#">Posts</a></li>
+						</ul>
+					</nav>
+					
+					<footer>
+						<nav class="statsnav">
+							<ul class="statsnav clearfix">
+								<li class="statsnav"><label>SEASON</label>12/13</li>
+								<li class="statsnav team"><span class="avatar"><a href="#" slidenum="5"><img src="images/donmills.png" /></a></span></li>
+								<ul class="statistics clearfix">
+									<li class="statsnav"><label>GP</label>10</li>
+									<li class="statsnav"><label>G</label>2</li>
+									<li class="statsnav"><label>A</label>5</li>
+									<li class="statsnav"><label>P</label>7</li>
+									<li class="statsnav"><label>PIM</label>10</li>
+								<!--	<li class="statsnav"><label>+/-</label>4</li>
+									<li class="statsnav"><label>HITS</label>40</li>-->
+								</ul>
+							</ul>
+						</nav>
+					</footer>
+						
+					<div class="feed">
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@michaelbunting</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/maximfurs.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+								<p>Hit <a href="#" slidenum="7">@mark_mano</a> at 10:10 in the 3rd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+			
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@_marcobozzo</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/maximfurs.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+								<p>Shot on <a href="#" slidenum="7">@mark_mano</a> at 13:00 in the 3rd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+			
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/maximfurs.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+								<p>Scored a goal at 5:02 in the 2nd vs <a href="#" slidenum="9">@toronto_titans</a></p>
+								<span class="assists">assisted by</span>
+								<span class="avatar assist"><a href="#" slidenum="3"><img src="images/bunting.png" /></a></span><span class="avatar assist"><a href="#" slidenum="11"><img src="images/avatar.png" /></a></span>
+		
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@jake_maeyer</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/maximfurs.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+								<p>Hit <a href="#" slidenum="6">@_marcobozzo</a> at 14:41 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+			
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@joetorno</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/maximfurs.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+								<p>Hit <a href="#" slidenum="6">@_marcobozzo</a> at 16:15 in the 1st vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+			
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@jake_maeyer</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/maximfurs.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+								<p>Hit <a href="#" slidenum="6">@_marcobozzo</a> at 0:01 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+			
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@michaelbunting</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/maximfurs.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+								<p>Shot on <a href="#">@mark_mano</a> at 0:12 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+			
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@harrylewis</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/maximfurs.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+								<p>Hit <a href="#">@jake_maeyer</a> at 14:48 in the 1st vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+			
+						</section>
+						
+					</div>
+							
+					<div class="about">
+							
+						<section class="section general">
+					
+							<!-- GENERAL SECTION -->				
+							<h1>General</h1>
+								<section class="post piece clearfix">
+										<span class="left">Hometown</span>
+										<span class="right">Burlington, ON</span>
+									</section>
+								<section class="post piece clearfix">
+										<span class="left">Height</span>
+										<span class="right">5'10"</span>
+									</section>
+								<section class="post piece clearfix">
+										<span class="left">Weight</span>
+										<span class="right">165 lbs</span>
+									</section>
+								<section class="post piece clearfix">
+										<span class="left">Date of Birth</span>
+										<span class="right">03/01/95</span>
+								</section>
+								<section class="post piece clearfix">
+										<span class="left">School</span>
+										<span class="right">TanenbaumCHAT</span>
+								</section>
+		
+						</section>
+						<section class="section assoc">
+								
+							<!-- ASSOCIATIONS -->
+							<h1>Associations</h1>
+								<section class="post piece clearfix">
+									<span class="left">Player for <a href="#" slidenum="5">Don Mills Flyers Midget AAA</a></span>
+									<span class="right">#18</span>
+								</section>
+		
+						</section>		
+						<section class="section">
+								
+							<section class="post piece clearfix">
+								<span class="left">102 Followers</span>
+							</section>
+		
+						</section>
+							
+					</div>
+							
+					<div class="posts">
+					
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@maxfurs</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="6"><img src="images/bozzo.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Marco Bozzo</h1><h3>@_marcobozzo</h3></span>
+								<p>Took the puck away from <a href="#">@harrylewis</a> at 14:14 in the 1st vs. <a href="#" slidenum="5">@donmillsflyers</a></p>
+							</div>
+			
+						</section>
+					
+					</div>			
+											
+				</section>
+								
+			</div>
+			
+			</div>
+			
+		<div slide="5">
+			
+				<!-- HEADER -->
+
+				<header class="profilehead">
+					<nav class="headnav">
+						<ul class="headnav">
+							<li class="headnav"><a href="#" slidenum="1">&#xe011;</a></li>
+							<li class="headnav">Don Mills Flyers</li>
+							<li class="headnav"><a href="#" class="new">&#xe001;</a></li>
+						</ul>
+					</nav>
+				</header>
+				
+				<div class="profile">
+					
+				<!-- COVER PHOTO AVATAR SECTION -->
+			
+				<section class="cover">
+					<span class="avatar"><img class="makeSmall" src="images/donmills.png" /></span>
+					<span class="user clearfix"><h1>Don Mills Flyers</h1><h3>@donmillsflyers</h3></span>
+				</section>
+						
+				<!-- STATS, INFO, AND POSTS SECTION -->
+					
+				<section class="info">
+							
+					<nav class="profilenav">
+						<ul class="profilenav clearfix">
+							<li class="profilenav"><a href="#" class="active">Stats</a></li>
+							<li class="profilenav"><a href="#">About</a></li>
+							<li class="profilenav"><a href="#">Leaders</a></li>
+						</ul>
+					</nav>
+					
+					<footer>
+						<nav class="statsnav">
+							<ul class="statsnav clearfix">
+								<li class="statsnav"><label>SEASON</label>12/13</li>
+								<li class="statsnav team"><span class="avatar"><a href="#" slidenum="10"><img src="images/midgetaaa.png" /></a></span></li>
+								<ul class="statistics clearfix">
+									<li class="statsnav"><label>GP</label>10</li>
+									<li class="statsnav"><label>W</label>5</li>
+									<li class="statsnav"><label>L</label>2</li>
+									<li class="statsnav"><label>T</label>3</li>
+									<li class="statsnav"><label>P</label>13</li>
+								<!--	<li class="statsnav"><label>+/-</label>4</li>
+									<li class="statsnav"><label>HITS</label>40</li>-->
+								</ul>
+							</ul>
+						</nav>
+					</footer>
+						
+					<div class="feed">
+						
+						<section class="post game clearfix">
+				
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="9"><img src="images/titans.png" /></a></span>
+								<span class="score">4</span>
+								<span class="user clearfix"><h1>Toronto Titans</h1><h3>@toronto_titans</h3></span>
+							</div>
+							<div class="right">
+								<span class="avatar"><a href="#"><img src="images/donmills.png" /></a></span>
+								<span class="score">1</span>
+								<span class="user clearfix"><h1>Don Mills Flyers</h1><h3>@donmillsflyers</h3></span>
+							</div>
+						
+						</section>
+						
+						<section class="post game clearfix">
+						
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/donmills.png" /></a></span>
+								<span class="score">3</span>
+								<span class="user clearfix"><h1>Don Mills Flyers</h1><h3>@donmillsflyers</h3></span>
+							</div>
+							<div class="right">
+								<span class="avatar"><a href="#" slidenum="9"><img src="images/titans.png" /></a></span>
+								<span class="score">2</span>
+								<span class="user clearfix"><h1>Toronto Titans</h1><h3>@toronto_titans</h3></span>
+							</div>
+						
+						</section>
+						
+						<section class="post game clearfix">
+				
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="9"><img src="images/titans.png" /></a></span>
+								<span class="score">3</span>
+								<span class="user clearfix"><h1>Toronto Titans</h1><h3>@toronto_titans</h3></span>
+							</div>
+							<div class="right">
+								<span class="avatar"><a href="#"><img src="images/donmills.png" /></a></span>
+								<span class="score">3</span>
+								<span class="user clearfix"><h1>Don Mills Flyers</h1><h3>@donmillsflyers</h3></span>
+							</div>
+						
+						</section>
+						
+						<section class="post game clearfix">
+						
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/donmills.png" /></a></span>
+								<span class="score">4</span>
+								<span class="user clearfix"><h1>Don Mills Flyers</h1><h3>@donmillsflyers</h3></span>
+							</div>
+							<div class="right">
+								<span class="avatar"><a href="#" slidenum="9"><img src="images/titans.png" /></a></span>
+								<span class="score">2</span>
+								<span class="user clearfix"><h1>Toronto Titans</h1><h3>@toronto_titans</h3></span>
+							</div>
+						
+						</section>
+						
+					</div>
+							
+					<div class="about">
+							
+						<section class="section general">
+					
+							<!-- GENERAL SECTION -->				
+							<h1>General</h1>
+								<section class="post piece clearfix">
+										<span class="left">Hometown</span>
+										<span class="right">Don Mills, ON</span>
+								</section>
+								<section class="post piece clearfix">
+										<span class="left">League</span>
+										<span class="right">GTHL</span>
+								</section>
+								<section class="post piece clearfix">
+										<span class="left">Players</span>
+										<span class="right">18</span>
+								</section>
+								<section class="post piece clearfix">
+										<span class="left">Founded</span>
+										<span class="right">1952</span>
+								</section>
+		
+						</section>
+						<section class="section assoc">
+								
+							<!-- ASSOCIATIONS -->
+							<h1>Associations</h1>
+								<section class="post piece clearfix">
+									<span class="left">Playing in <a href="#" slidenum="10">Greater Toronto Hockey League</a></span>
+									<span class="right"></span>
+								</section>
+		
+						</section>		
+						<section class="section">
+								
+							<section class="post piece clearfix">
+								<span class="left">102 Followers</span>
+							</section>
+		
+						</section>
+							
+					</div>
+							
+					<div class="posts">
+					
+						<table>
+							<tr>
+								<th class="first">#</th>
+								<th class="first">PLAYER</th>
+								<th>GP</th>
+								<th>G</th>
+								<th>A</th>
+								<th>P</th>
+								<th>PIM</th>
+							</tr>
+							<tr>
+								<td class="first">1</td>
+								<td class="first"><a href="#" slidenum="11">@harrylewis</a></td>
+								<td>4</td>
+								<td>3</td>
+								<td>3</td>
+								<td>6</td>
+								<td>6</td>
+							</tr>
+							<tr class="borderbottom">
+								<td class="first">2</td>
+								<td class="first"><a href="#" slidenum="3">@michaelbunting</a></td>
+								<td>4</td>
+								<td>3</td>
+								<td>2</td>
+								<td>5</td>
+								<td>10</td>
+							</tr>
+							<tr class="borderbottom">
+								<td class="first">3</td>
+								<td class="first"><a href="#" slidenum="4">@maxfurs</a></td>
+								<td>4</td>
+								<td>1</td>
+								<td>1</td>
+								<td>2</td>
+								<td>7</td>
+							</tr>
+						</table>
+					
+					</div>			
+											
+				</section>
+								
+			</div>
+			
+			</div>
+		
+		<div slide="6">
+			
+				<!-- HEADER -->
+
+				<header class="profilehead">
+					<nav class="headnav">
+						<ul class="headnav">
+							<li class="headnav"><a href="#" slidenum="1">&#xe011;</a></li>
+							<li class="headnav">Marco Bozzo</li>
+							<li class="headnav"><a href="#" class="new">&#xe001;</a></li>
+						</ul>
+					</nav>
+				</header>
+				
+				<div class="profile">
+					
+				<!-- COVER PHOTO AVATAR SECTION -->
+			
+				<section class="cover">
+					<span class="avatar"><img class="makeSmall" src="images/bozzo.png" /></span>
+					<span class="user clearfix"><h1>Marco Bozzo</h1><h3>@marco_bozzo</h3></span>
+				</section>
+						
+				<!-- STATS, INFO, AND POSTS SECTION -->
+					
+				<section class="info">
+							
+					<nav class="profilenav">
+						<ul class="profilenav clearfix">
+							<li class="profilenav"><a href="#" class="active">Stats</a></li>
+							<li class="profilenav"><a href="#">About</a></li>
+							<li class="profilenav"><a href="#">Posts</a></li>
+						</ul>
+					</nav>
+					
+					<footer>
+						<nav class="statsnav">
+							<ul class="statsnav clearfix">
+								<li class="statsnav"><label>SEASON</label>12/13</li>
+								<li class="statsnav team"><span class="avatar"><a href="#" slidenum="9"><img src="images/titans.png" /></a></span></li>
+								<ul class="statistics clearfix">
+									<li class="statsnav"><label>GP</label>29</li>
+									<li class="statsnav"><label>G</label>8</li>
+									<li class="statsnav"><label>A</label>7</li>
+									<li class="statsnav"><label>P</label>15</li>
+									<li class="statsnav"><label>PIM</label>43</li>
+								<!--	<li class="statsnav"><label>+/-</label>4</li>
+									<li class="statsnav"><label>HITS</label>40</li>-->
+								</ul>
+							</ul>
+						</nav>
+					</footer>
+						
+					<div class="feed">
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/bozzo.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Marco Bozzo</h1><h3>@_marcobozzo</h3></span>
+								<p>Scored a goal at 18:56 in the 3rd vs <a href="#" slidenum="5">@donmillsflyers</a></p>
+								<span class="assists">assisted by</span>
+								<span class="avatar assist"><a href="#" slidenum="8"><img src="images/manolescu.png" /></a></span>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@maxfurs</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/bozzo.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Marco Bozzo</h1><h3>@_marcobozzo</h3></span>
+								<p>Took the puck away from <a href="#">@harrylewis</a> at 14:14 in the 1st vs. <a href="#" slidenum="5">@donmillsflyers</a></p>
+							</div>
+			
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@mark_mano</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/bozzo.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Marco Bozzo</h1><h3>@_marcobozzo</h3></span>
+								<p>Scored a goal at 5:38 in the 3rd vs <a href="#" slidenum="5">@donmillsflyers</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@markmano</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/bozzo.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Marco Bozzo</h1><h3>@_marcobozzo</h3></span>
+								<p>Scored a goal at 3:40 in the 1st vs <a href="#" slidenum="5">@donmillsflyers</a></p>
+							</div>
+						
+						</section>
+						
+					</div>
+							
+					<div class="about">
+							
+						<section class="section general">
+					
+							<!-- GENERAL SECTION -->				
+							<h1>General</h1>
+								<section class="post piece clearfix">
+										<span class="left">Hometown</span>
+										<span class="right">Toronto, ON</span>
+									</section>
+								<section class="post piece clearfix">
+										<span class="left">Height</span>
+										<span class="right">5'08"</span>
+									</section>
+								<section class="post piece clearfix">
+										<span class="left">Weight</span>
+										<span class="right">150 lbs</span>
+									</section>
+								<section class="post piece clearfix">
+										<span class="left">Date of Birth</span>
+										<span class="right">12/22/94</span>
+								</section>
+								<section class="post piece clearfix">
+										<span class="left">School</span>
+										<span class="right">Westmount Collegiate</span>
+								</section>
+		
+						</section>
+						<section class="section assoc">
+								
+							<!-- ASSOCIATIONS -->
+							<h1>Associations</h1>
+								<section class="post piece clearfix">
+									<span class="left">Playing for <a href="#" slidenum="9">Toronto Titans Midget AAA</a></span>
+									<span class="right">#61</span>
+								</section>
+		
+						</section>		
+						<section class="section">
+								
+							<section class="post piece clearfix">
+								<span class="left">176 Followers</span>
+							</section>
+		
+						</section>
+							
+					</div>
+							
+					<div class="posts">
+					
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@_marcobozzo</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+								<p>Shot on <a href="#" slidenum="7">@mark_mano</a> at 13:00 in the 3rd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+			
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@_marcobozzo</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="8"><img src="images/manolescu.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Jake De Maeyer</h1><h3>@jake_maeyer</h3></span>
+								<p>Hit <a href="#" slidenum="3">@michaelbunting</a> at 10:01 in the 2nd vs. <a href="#" slidenum="5">@donmillsflyers</a></p>
+							</div>
+			
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@_marcobozzo</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="2"><img src="images/avatar.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Harry Lewis</h1><h3>@harrylewis</h3></span>
+								<p>Took a slashing penalty at 8:07 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@_marcobozzo</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="8"><img src="images/manolescu.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Jake De Maeyer</h1><h3>@jake_maeyer</h3></span>
+								<p>Shot on <a href="#">@evan_morse</a> at 10:03 in the 1st vs. <a href="#" slidenum="5">@donmillsflyers</a></p>
+							</div>
+			
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@_marcobozzo</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="3"><img src="images/bunting.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Michael Bunting</h1><h3>@michaelbun...</h3></span>
+								<p>Shot on <a href="#">@mark_mano</a> at 13:15 in the 1st vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+			
+						</section>
+						
+					</div>			
+											
+				</section>
+								
+			</div>
+			
+			</div>
+		
+		<div slide="7">
+			
+				<!-- HEADER -->
+
+				<header class="profilehead">
+					<nav class="headnav">
+						<ul class="headnav">
+							<li class="headnav"><a href="#" slidenum="1">&#xe011;</a></li>
+							<li class="headnav">Mark Manolescu</li>
+							<li class="headnav"><a href="#" class="new">&#xe001;</a></li>
+						</ul>
+					</nav>
+				</header>
+				
+				<div class="profile">
+					
+				<!-- COVER PHOTO AVATAR SECTION -->
+			
+				<section class="cover">
+					<span class="avatar"><img class="makeSmall" src="images/maeyer.png" /></span>
+					<span class="user clearfix"><h1>Mark Manolescu</h1><h3>@markmano</h3></span>
+				</section>
+						
+				<!-- STATS, INFO, AND POSTS SECTION -->
+					
+				<section class="info">
+							
+					<nav class="profilenav">
+						<ul class="profilenav clearfix">
+							<li class="profilenav"><a href="#" class="active">Stats</a></li>
+							<li class="profilenav"><a href="#">About</a></li>
+							<li class="profilenav"><a href="#">Posts</a></li>
+						</ul>
+					</nav>
+					
+					<footer>
+						<nav class="statsnav">
+							<ul class="statsnav clearfix">
+								<li class="statsnav"><label>SEASON</label>12/13</li>
+								<li class="statsnav team"><span class="avatar"><a href="#" slidenum="9"><img src="images/titans.png" /></a></span></li>
+								<ul class="statistics clearfix">
+									<li class="statsnav"><label>GP</label>29</li>
+									<li class="statsnav"><label>MIN</label>985</li>
+									<li class="statsnav"><label>W</label>10</li>
+									<li class="statsnav"><label>L</label>11</li>
+									<li class="statsnav"><label>T</label>2</li>
+								<!--	<li class="statsnav"><label>+/-</label>4</li>
+									<li class="statsnav"><label>HITS</label>40</li>-->
+								</ul>
+							</ul>
+						</nav>
+					</footer>
+						
+					<div class="feed">
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@harrylewis</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/maeyer.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Mark Manolescu</h1><h3>@mark_mano</h3></span>
+								<p>Took a slashing penalty at 18:03 in the 3rd vs. <a href="#" slidenum="5">@donmillsflyers</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@michaelbunting</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/maeyer.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Mark Manolescu</h1><h3>@mark_mano</h3></span>
+								<p>Took a fighting penalty at 0:10 in the 1st vs. <a href="#" slidenum="5">@donmillsflyers</a></p>
+							</div>
+						
+						</section>
+						
+					</div>
+							
+					<div class="about">
+							
+						<section class="section general">
+					
+							<!-- GENERAL SECTION -->				
+							<h1>General</h1>
+								<section class="post piece clearfix">
+										<span class="left">Hometown</span>
+										<span class="right">Toronto, ON</span>
+									</section>
+								<section class="post piece clearfix">
+										<span class="left">Height</span>
+										<span class="right">6'1"</span>
+									</section>
+								<section class="post piece clearfix">
+										<span class="left">Weight</span>
+										<span class="right">200 lbs</span>
+									</section>
+								<section class="post piece clearfix">
+										<span class="left">Date of Birth</span>
+										<span class="right">07/07/95</span>
+								</section>
+								<section class="post piece clearfix">
+										<span class="left">School</span>
+										<span class="right">Leaside</span>
+								</section>
+		
+						</section>
+						<section class="section assoc">
+								
+							<!-- ASSOCIATIONS -->
+							<h1>Associations</h1>
+								<section class="post piece clearfix">
+									<span class="left">Playing for <a href="#" slidenum="9">Toronto Titans Midget AAA</a></span>
+									<span class="right">#33</span>
+								</section>
+		
+						</section>		
+						<section class="section">
+								
+							<section class="post piece clearfix">
+								<span class="left">533 Followers</span>
+							</section>
+		
+						</section>
+							
+					</div>
+							
+					<div class="posts">
+					
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@mark_mano</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="6"><img src="images/bozzo.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Marco Bozzo</h1><h3>@_marcobozzo</h3></span>
+								<p>Scored a goal at 5:38 in the 3rd vs <a href="#" slidenum="5">@donmillsflyers</a></p>
+							</div>
+						
+						</section>
+					
+					</div>			
+											
+				</section>
+								
+			</div>
+			
+			</div>
+		
+		<div slide="8">
+			
+				<!-- HEADER -->
+
+				<header class="profilehead">
+					<nav class="headnav">
+						<ul class="headnav">
+							<li class="headnav"><a href="#" slidenum="1">&#xe011;</a></li>
+							<li class="headnav">Jacob De Maeyer</li>
+							<li class="headnav"><a href="#" class="new">&#xe001;</a></li>
+						</ul>
+					</nav>
+				</header>
+				
+				<div class="profile">
+					
+				<!-- COVER PHOTO AVATAR SECTION -->
+			
+				<section class="cover">
+					<span class="avatar"><img class="makeSmall" src="images/manolescu.png" /></span>
+					<span class="user clearfix"><h1>Jacob De Maeyer</h1><h3>@jake_maeyer</h3></span>
+				</section>
+						
+				<!-- STATS, INFO, AND POSTS SECTION -->
+					
+				<section class="info">
+							
+					<nav class="profilenav">
+						<ul class="profilenav clearfix">
+							<li class="profilenav"><a href="#" class="active">Stats</a></li>
+							<li class="profilenav"><a href="#">About</a></li>
+							<li class="profilenav"><a href="#">Posts</a></li>
+						</ul>
+					</nav>
+					
+					<footer>
+						<nav class="statsnav">
+							<ul class="statsnav clearfix">
+								<li class="statsnav"><label>SEASON</label>12/13</li>
+								<li class="statsnav team"><span class="avatar"><a href="#" slidenum="9"><img src="images/titans.png" /></a></span></li>
+								<ul class="statistics clearfix">
+									<li class="statsnav"><label>GP</label>32</li>
+									<li class="statsnav"><label>G</label>18</li>
+									<li class="statsnav"><label>A</label>18</li>
+									<li class="statsnav"><label>P</label>36</li>
+									<li class="statsnav"><label>PIM</label>55</li>
+								<!--	<li class="statsnav"><label>+/-</label>4</li>
+									<li class="statsnav"><label>HITS</label>40</li>-->
+								</ul>
+							</ul>
+						</nav>
+					</footer>
+						
+					<div class="feed">
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@harrylewis</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/manolescu.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Jake De Maeyer</h1><h3>@jake_maeyer</h3></span>
+								<p>Scored a goal at 2:26 in the 3rd vs <a href="#" slidenum="5">@donmillsflyers</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@_marcobozzo</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/manolescu.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Jake De Maeyer</h1><h3>@jake_maeyer</h3></span>
+								<p>Hit <a href="#" slidenum="3">@michaelbunting</a> at 10:01 in the 2nd vs. <a href="#" slidenum="5">@donmillsflyers</a></p>
+							</div>
+			
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/manolescu.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Jake De Maeyer</h1><h3>@jake_maeyer</h3></span>
+								<p>Scored a goal at 12:57 in the 2nd vs <a href="#" slidenum="5">@donmillsflyers</a></p>
+								<span class="assists">assisted by</span>
+								<span class="avatar assist"><a href="#" slidenum="7"><img src="images/maeyer.png" /></a></span>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/manolescu.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Jake De Maeyer</h1><h3>@jake_maeyer</h3></span>
+								<p>Scored a goal at 1:51 in the 1st vs <a href="#" slidenum="5">@donmillsflyers</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@michaelbunting</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/manolescu.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Jake De Maeyer</h1><h3>@jake_maeyer</h3></span>
+								<p>Shot on <a href="#">@evan_morse</a> at 8:18 in the 3rd vs. <a href="#" slidenum="5">@donmmillsflyers</a></p>
+							</div>
+			
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@_marcobozzo</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/manolescu.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Jake De Maeyer</h1><h3>@jake_maeyer</h3></span>
+								<p>Shot on <a href="#">@evan_morse</a> at 10:03 in the 1st vs. <a href="#" slidenum="5">@donmillsflyers</a></p>
+							</div>
+			
+						</section>
+						
+					</div>
+							
+					<div class="about">
+							
+						<section class="section general">
+					
+							<!-- GENERAL SECTION -->				
+							<h1>General</h1>
+								<section class="post piece clearfix">
+										<span class="left">Hometown</span>
+										<span class="right">Toronto, ON</span>
+									</section>
+								<section class="post piece clearfix">
+										<span class="left">Height</span>
+										<span class="right">6'2"</span>
+									</section>
+								<section class="post piece clearfix">
+										<span class="left">Weight</span>
+										<span class="right">190 lbs</span>
+									</section>
+								<section class="post piece clearfix">
+										<span class="left">Date of Birth</span>
+										<span class="right">11/11/94</span>
+								</section>
+								<section class="post piece clearfix">
+										<span class="left">School</span>
+										<span class="right">Leaside</span>
+								</section>
+		
+						</section>
+						<section class="section assoc">
+								
+							<!-- ASSOCIATIONS -->
+							<h1>Associations</h1>
+								<section class="post piece clearfix">
+									<span class="left">Playing for <a href="#" slidenum="9">Toronto Titans Midget AAA</a></span>
+									<span class="right">#96</span>
+								</section>
+		
+						</section>		
+						<section class="section">
+								
+							<section class="post piece clearfix">
+								<span class="left">10 Followers</span>
+							</section>
+		
+						</section>
+							
+					</div>
+							
+					<div class="posts">
+					
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@jake_maeyer</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="3"><img src="images/bunting.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Michael Bunting</h1><h3>@michaelbun...</h3></span>
+								<p>Received a 1 game suspension for a hit from behind at 18:34 in the 3rd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@jake_maeyer</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+								<p>Hit <a href="#" slidenum="6">@_marcobozzo</a> at 14:41 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+			
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@jake_maeyer</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+								<p>Hit <a href="#" slidenum="6">@_marcobozzo</a> at 0:01 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+			
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@jake_maeyer</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="2"><img src="images/avatar.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Harry Lewis</h1><h3>@harrylewis</h3></span>
+								<p>Hit <a href="#" slidenum="6">@_marcobozzo</a> at 3:15 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+			
+						</section>
+					
+					</div>			
+											
+				</section>
+								
+			</div>
+			
+			</div>
+		
+		<div slide="9">
+			
+				<!-- HEADER -->
+
+				<header class="profilehead">
+					<nav class="headnav">
+						<ul class="headnav">
+							<li class="headnav"><a href="#" slidenum="1">&#xe011;</a></li>
+							<li class="headnav">Toronto Titans</li>
+							<li class="headnav"><a href="#" class="new">&#xe001;</a></li>
+						</ul>
+					</nav>
+				</header>
+				
+				<div class="profile">
+					
+				<!-- COVER PHOTO AVATAR SECTION -->
+			
+				<section class="cover">
+					<span class="avatar"><img class="makeSmall" src="images/titans.png" /></span>
+					<span class="user clearfix"><h1>Toronto Titans</h1><h3>@_torontotitans</h3></span>
+				</section>
+						
+				<!-- STATS, INFO, AND POSTS SECTION -->
+					
+				<section class="info">
+							
+					<nav class="profilenav">
+						<ul class="profilenav clearfix">
+							<li class="profilenav"><a href="#" class="active">Stats</a></li>
+							<li class="profilenav"><a href="#">About</a></li>
+							<li class="profilenav"><a href="#">Leaders</a></li>
+						</ul>
+					</nav>
+					
+					<footer>
+						<nav class="statsnav">
+							<ul class="statsnav clearfix">
+								<li class="statsnav"><label>SEASON</label>12/13</li>
+								<li class="statsnav team"><span class="avatar"><a href="#" slidenum="10"><img src="images/midgetaaa.png" /></a></span></li>
+								<ul class="statistics clearfix">
+									<li class="statsnav"><label>GP</label>11</li>
+									<li class="statsnav"><label>W</label>10</li>
+									<li class="statsnav"><label>L</label>0</li>
+									<li class="statsnav"><label>T</label>1</li>
+									<li class="statsnav"><label>P</label>21</li>
+								<!--	<li class="statsnav"><label>+/-</label>4</li>
+									<li class="statsnav"><label>HITS</label>40</li>-->
+								</ul>
+							</ul>
+						</nav>
+					</footer>
+						
+					<div class="feed">
+						
+						<section class="post game clearfix">
+				
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/titans.png" /></a></span>
+								<span class="score">4</span>
+								<span class="user clearfix"><h1>Toronto Titans</h1><h3>@toronto_titans</h3></span>
+							</div>
+							<div class="right">
+								<span class="avatar"><a href="#" slidenum="5"><img src="images/donmills.png" /></a></span>
+								<span class="score">1</span>
+								<span class="user clearfix"><h1>Don Mills Flyers</h1><h3>@donmillsflyers</h3></span>
+							</div>
+						
+						</section>
+						
+						<section class="post game clearfix">
+						
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/donmills.png" /></a></span>
+								<span class="score">3</span>
+								<span class="user clearfix"><h1>Don Mills Flyers</h1><h3>@donmillsflyers</h3></span>
+							</div>
+							<div class="right">
+								<span class="avatar"><a href="#" slidenum="9"><img src="images/titans.png" /></a></span>
+								<span class="score">2</span>
+								<span class="user clearfix"><h1>Toronto Titans</h1><h3>@toronto_titans</h3></span>
+							</div>
+						
+						</section>
+						
+						<section class="post game clearfix">
+				
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/titans.png" /></a></span>
+								<span class="score">3</span>
+								<span class="user clearfix"><h1>Toronto Titans</h1><h3>@toronto_titans</h3></span>
+							</div>
+							<div class="right">
+								<span class="avatar"><a href="#" slidenum="5"><img src="images/donmills.png" /></a></span>
+								<span class="score">3</span>
+								<span class="user clearfix"><h1>Don Mills Flyers</h1><h3>@donmillsflyers</h3></span>
+							</div>
+						
+						</section>
+						
+						<section class="post game clearfix">
+						
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="5"><img src="images/donmills.png" /></a></span>
+								<span class="score">4</span>
+								<span class="user clearfix"><h1>Don Mills Flyers</h1><h3>@donmillsflyers</h3></span>
+							</div>
+							<div class="right">
+								<span class="avatar"><a href="#"><img src="images/titans.png" /></a></span>
+								<span class="score">2</span>
+								<span class="user clearfix"><h1>Toronto Titans</h1><h3>@toronto_titans</h3></span>
+							</div>
+						
+						</section>
+						
+					</div>
+							
+					<div class="about">
+							
+						<section class="section general">
+					
+							<!-- GENERAL SECTION -->				
+							<h1>General</h1>
+								<section class="post piece clearfix">
+										<span class="left">Hometown</span>
+										<span class="right">Toronto, ON</span>
+								</section>
+								<section class="post piece clearfix">
+										<span class="left">League</span>
+										<span class="right">GTHL</span>
+								</section>
+								<section class="post piece clearfix">
+										<span class="left">Players</span>
+										<span class="right">19</span>
+								</section>
+								<section class="post piece clearfix">
+										<span class="left">Founded</span>
+										<span class="right">1995</span>
+								</section>
+		
+						</section>
+						<section class="section assoc">
+								
+							<!-- ASSOCIATIONS -->
+							<h1>Associations</h1>
+								<section class="post piece clearfix">
+									<span class="left">Playing in <a href="#" slidenum="10">Greater Toronto Hockey League</a></span>
+									<span class="right"></span>
+								</section>
+		
+						</section>		
+						<section class="section">
+								
+							<section class="post piece clearfix">
+								<span class="left">132 Followers</span>
+							</section>
+		
+						</section>
+							
+					</div>
+							
+					<div class="posts">
+					
+						<table>
+							<tr>
+								<th class="first">#</th>
+								<th class="first">PLAYER</th>
+								<th>GP</th>
+								<th>G</th>
+								<th>A</th>
+								<th>P</th>
+								<th>PIM</th>
+							</tr>
+							<tr>
+								<td class="first">1</td>
+								<td class="first"><a href="#" slidenum="6">@_marcobozzo</a></td>
+								<td>4</td>
+								<td>2</td>
+								<td>3</td>
+								<td>5</td>
+								<td>6</td>
+							</tr>
+							<tr class="borderbottom">
+								<td class="first">2</td>
+								<td class="first"><a href="#" slidenum="8">@jake_maeyer</a></td>
+								<td>4</td>
+								<td>1</td>
+								<td>3</td>
+								<td>4</td>
+								<td>4</td>
+							</tr>
+							<tr class="borderbottom">
+								<td class="first">3</td>
+								<td class="first"><a href="#" slidenum="7">@markmano</a></td>
+								<td>4</td>
+								<td>0</td>
+								<td>1</td>
+								<td>1</td>
+								<td>7</td>
+							</tr>
+						</table>
+					
+					</div>			
+											
+				</section>
+								
+			</div>
+			
+			</div>
+		
+		<div slide="10">
+			
+				<!-- HEADER -->
+
+				<header class="profilehead">
+					<nav class="headnav">
+						<ul class="headnav">
+							<li class="headnav"><a href="#" slidenum="1">&#xe011;</a></li>
+							<li class="headnav">GTHL Midget AAA</li>
+							<li class="headnav"><a href="#" class="new">&#xe001;</a></li>
+						</ul>
+					</nav>
+				</header>
+				
+				<div class="profile">
+					
+				<!-- COVER PHOTO AVATAR SECTION -->
+			
+				<section class="cover">
+					<span class="avatar"><img class="makeSmall" src="images/midgetaaa.png" /></span>
+					<span class="user clearfix"><h1>GTHL Midget AAA</h1><h3>@gthlmidgetaaa</h3></span>
+				</section>
+						
+				<!-- STATS, INFO, AND POSTS SECTION -->
+					
+				<section class="info">
+							
+					<nav class="profilenav">
+						<ul class="profilenav clearfix">
+							<li class="profilenav"><a href="#" class="active">Stats</a></li>
+							<li class="profilenav"><a href="#">About</a></li>
+							<li class="profilenav"><a href="#">Leaders</a></li>
+						</ul>
+					</nav>
+						
+					<div class="feed">
+						
+						<section class="post game clearfix">
+				
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="9"><img src="images/titans.png" /></a></span>
+								<span class="score">4</span>
+								<span class="user clearfix"><h1>Toronto Titans</h1><h3>@toronto_titans</h3></span>
+							</div>
+							<div class="right">
+								<span class="avatar"><a href="#" slidenum="5"><img src="images/donmills.png" /></a></span>
+								<span class="score">1</span>
+								<span class="user clearfix"><h1>Don Mills Flyers</h1><h3>@donmillsflyers</h3></span>
+							</div>
+						
+						</section>
+						
+						<section class="post game clearfix">
+						
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="5"><img src="images/donmills.png" /></a></span>
+								<span class="score">3</span>
+								<span class="user clearfix"><h1>Don Mills Flyers</h1><h3>@donmillsflyers</h3></span>
+							</div>
+							<div class="right">
+								<span class="avatar"><a href="#" slidenum="9"><img src="images/titans.png" /></a></span>
+								<span class="score">2</span>
+								<span class="user clearfix"><h1>Toronto Titans</h1><h3>@toronto_titans</h3></span>
+							</div>
+						
+						</section>
+						
+					</div>
+							
+					<div class="about">
+							
+						<section class="section general">
+					
+							<!-- GENERAL SECTION -->				
+							<h1>General</h1>
+								<section class="post piece clearfix">
+										<span class="left">Hometown</span>
+										<span class="right">Toronto, ON</span>
+								</section>
+								<section class="post piece clearfix">
+										<span class="left">Teams</span>
+										<span class="right">12</span>
+								</section>
+								<section class="post piece clearfix">
+										<span class="left">Founded</span>
+										<span class="right">1912</span>
+								</section>
+		
+						</section>
+						<!--<section class="section assoc">
+								
+							<!-- ASSOCIATIONS -->
+							<!--<h1>Associations</h1>
+								<section class="post piece clearfix">
+									<span class="left">Playing in <a href="#">Greater Toronto Hockey League</a></span>
+									<span class="right"></span>
+								</section>
+		
+						</section>	-->	
+						<section class="section">
+								
+							<section class="post piece clearfix">
+								<span class="left">1002 Followers</span>
+							</section>
+		
+						</section>
+							
+					</div>
+							
+					<div class="posts">
+					
+						<table>
+							<tr>
+								<th class="first">#</th>
+								<th class="first">TEAM</th>
+								<th>GP</th>
+								<th>W</th>
+								<th>L</th>
+								<th>T</th>
+								<th>P</th>
+							</tr>
+							<tr>
+								<td class="first">1</td>
+								<td class="first"><a href="#" slidenum="5">@donmillsflyers</a></td>
+								<td>4</td>
+								<td>2</td>
+								<td>1</td>
+								<td>1</td>
+								<td>5</td>
+							</tr>
+							<tr class="borderbottom">
+								<td class="first">2</td>
+								<td class="first"><a href="#" slidenum="9">@toronto_titans</a></td>
+								<td>4</td>
+								<td>1</td>
+								<td>2</td>
+								<td>1</td>
+								<td>3</td>
+							</tr>
+						</table>
+					
+					</div>			
+											
+				</section>
+								
+			</div>
+			
+			</div>
+		
+		<div slide="2">
+			
+				<!-- HEADER -->
+
+				<header class="profilehead">
+					<nav class="headnav">
+						<ul class="headnav">
+							<li class="headnav"><a href="#" slidenum="1">&#xe011;</a></li>
+							<li class="headnav">Joseph Iantorno</li>
+							<li class="headnav"><a href="#" class="new">&#xe001;</a></li>
+						</ul>
+					</nav>
+				</header>
+				
+				<div class="profile">
+					
+				<!-- COVER PHOTO AVATAR SECTION -->
+			
+				<section class="cover">
+					<span class="avatar"><img class="makeSmall" src="images/joe.png" /></span>
+					<span class="user clearfix"><h1>Joseph Iantorno</h1><h3>@joetorno</h3></span>
+				</section>
+						
+				<!-- STATS, INFO, AND POSTS SECTION -->
+					
+				<section class="info">
+							
+					<nav class="profilenav">
+						<ul class="profilenav clearfix">
+							<li class="profilenav"><a href="#" class="active">Stats</a></li>
+							<li class="profilenav"><a href="#">About</a></li>
+							<li class="profilenav"><a href="#">Posts</a></li>
+						</ul>
+					</nav>
+					
+					<footer>
+						<nav class="statsnav">
+							<ul class="statsnav clearfix">
+								<li class="statsnav"><label>SEASON</label>12/13</li>
+								<li class="statsnav team"><span class="avatar"><a href="#" slidenum="10"><img src="images/midgetaaa.png" /></a></span></li>
+								<ul class="statistics clearfix">
+									<li class="statsnav"><label>GP</label>10</li>
+									<li class="statsnav"><label>W</label>5</li>
+									<li class="statsnav"><label>L</label>2</li>
+									<li class="statsnav"><label>T</label>3</li>
+									<li class="statsnav"><label>P</label>13</li>
+								<!--	<li class="statsnav"><label>+/-</label>4</li>
+									<li class="statsnav"><label>HITS</label>40</li>-->
+								</ul>
+							</ul>
+						</nav>
+					</footer>
+						
+					<div class="feed">
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@michaelbunting</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/joe.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Joseph Iantorno</h1><h3>@joetorno</h3></span>
+								<p>Received a 1 game suspension for unsportsmanlike conduct at 0:29 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@harrylewis</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/joe.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Joseph Iantorno</h1><h3>@joetorno</h3></span>
+								<p>Took a too many men on the ice penalty at 3:45 in the 3rd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@michaelbunting</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/joe.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Joseph Iantorno</h1><h3>@joetorno</h3></span>
+								<p>Received a 3 game suspension for unsportsmanlike conduct at 10:24 in the 1st vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@harrylewis</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#"><img src="images/joe.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Joseph Iantorno</h1><h3>@joetorno</h3></span>
+								<p>Took a too many men on the ice penalty at 16:45 in the 3rd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+						
+						</section>
+						
+					</div>
+							
+					<div class="about">
+							
+						<section class="section general">
+					
+							<!-- GENERAL SECTION -->				
+							<h1>General</h1>
+								<section class="post piece clearfix">
+										<span class="left">Hometown</span>
+										<span class="right">Toronto, ON</span>
+									</section>
+								<section class="post piece clearfix">
+										<span class="left">Height</span>
+										<span class="right">6'1"</span>
+									</section>
+								<section class="post piece clearfix">
+										<span class="left">Weight</span>
+										<span class="right">190 lbs</span>
+									</section>
+								<section class="post piece clearfix">
+										<span class="left">Date of Birth</span>
+										<span class="right">03/21/63</span>
+								</section>
+		
+						</section>
+						<section class="section assoc">
+								
+							<!-- ASSOCIATIONS -->
+							<h1>Associations</h1>
+								<section class="post piece clearfix">
+									<span class="left">Coaching for <a href="#" slidenum="5">Don Mills Flyers Midget AAA</a></span>
+								</section>
+		
+						</section>		
+						<section class="section">
+								
+							<section class="post piece clearfix">
+								<span class="left">533 Followers</span>
+							</section>
+		
+						</section>
+							
+					</div>
+							
+					<div class="posts">
+					
+						<section class="post stat clearfix">
+				
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="6"><img src="images/bozzo.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Marco Bozzo</h1><h3>@_marcobozzo</h3></span>
+								<p>Scored a goal at 18:56 in the 3rd vs <a href="#" slidenum="5">@donmillsflyers</a></p>
+								<span class="assists">assisted by</span>
+								<span class="avatar assist"><a href="#" slidenum="8"><img src="images/manolescu.png" /></a></span>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+								<p>Scored a goal at 5:02 in the 2nd vs <a href="#" slidenum="9">@toronto_titans</a></p>
+								<span class="assists">assisted by</span>
+								<span class="avatar assist"><a href="#" slidenum="3"><img src="images/bunting.png" /></a></span><span class="avatar assist"><a href="#" slidenum="11"><img src="images/avatar.png" /></a></span>
+		
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="3"><img src="images/bunting.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Michael Bunting</h1><h3>@michaelbun...</h3></span>
+								<p>Took a tripping penalty at 10:56 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="8"><img src="images/manolescu.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Jake De Maeyer</h1><h3>@jake_maeyer</h3></span>
+								<p>Scored a goal at 12:57 in the 2nd vs <a href="#" slidenum="5">@donmillsflyers</a></p>
+								<span class="assists">assisted by</span>
+								<span class="avatar assist"><a href="#" slidenum="7"><img src="images/maeyer.png" /></a></span>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="8"><img src="images/manolescu.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Jake De Maeyer</h1><h3>@jake_maeyer</h3></span>
+								<p>Scored a goal at 1:51 in the 1st vs <a href="#" slidenum="5">@donmillsflyers</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@joetorno</span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+								<p>Hit <a href="#" slidenum="6">@_marcobozzo</a> at 16:15 in the 1st vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+			
+						</section>
+						
+						<section class="post game clearfix">
+						
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="9"><img src="images/titans.png" /></a></span>
+								<span class="score">4</span>
+								<span class="user clearfix"><h1>Toronto Titans</h1><h3>@toronto_titans</h3></span>
+							</div>
+							<div class="right">
+								<span class="avatar"><a href="#" slidenum="5"><img src="images/donmills.png" /></a></span>
+								<span class="score">1</span>
+								<span class="user clearfix"><h1>Don Mills Flyers</h1><h3>@donmillsflyers</h3></span>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="3"><img src="images/bunting.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Michael Bunting</h1><h3>@michaelbun...</h3></span>
+								<p>Scored a goal at 4:52 in the 3rd vs <a href="#" slidenum="9">@toronto_titans</a></p>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="11"><img src="images/avatar.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Harry Lewis</h1><h3>@harrylewis</h3></span>
+								<p>Scored a goal at 0:01 in the 2nd vs <a href="#" slidenum="9">@toronto_titans</a></p>
+								<span class="assists">assisted by</span>
+								<span class="avatar assist"><a href="#" slidenum="3"><img src="images/bunting.png" /></a></span>
+							</div>
+						
+						</section>
+						
+						<section class="post stat clearfix">
+						
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="3"><img src="images/bunting.png" /></a></span>
+							</div>
+							<div class="right">
+								<span class="user clearfix"><h1>Michael Bunting</h1><h3>@michaelbun...</h3></span>
+								<p>Scored a goal at 10:00 in the 1st vs <a href="#" slidenum="9">@toronto_titans</a></p>
+								<span class="assists">assisted by</span>
+								<span class="avatar assist"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span><span class="avatar assist"><a href="#" slidenum="11"><img src="images/avatar.png" /></a></span>
+							</div>
+						
+						</section>
+						
+						<section class="post game clearfix">
+						
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="5"><img src="images/donmills.png" /></a></span>
+								<span class="score">3</span>
+								<span class="user clearfix"><h1>Don Mills Flyers</h1><h3>@donmillsflyers</h3></span>
+							</div>
+							<div class="right">
+								<span class="avatar"><a href="#" slidenum="9"><img src="images/titans.png" /></a></span>
+								<span class="score">2</span>
+								<span class="user clearfix"><h1>Toronto Titans</h1><h3>@toronto_titans</h3></span>
+							</div>
+						
+						</section>
+						
+						<section class="post game clearfix">
+				
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="9"><img src="images/titans.png" /></a></span>
+								<span class="score">3</span>
+								<span class="user clearfix"><h1>Toronto Titans</h1><h3>@toronto_titans</h3></span>
+							</div>
+							<div class="right">
+								<span class="avatar"><a href="#" slidenum="5"><img src="images/donmills.png" /></a></span>
+								<span class="score">3</span>
+								<span class="user clearfix"><h1>Don Mills Flyers</h1><h3>@donmillsflyers</h3></span>
+							</div>
+						
+						</section>
+						
+						<section class="post game clearfix">
+						
+							<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+							<div class="left">
+								<span class="avatar"><a href="#" slidenum="5"><img src="images/donmills.png" /></a></span>
+								<span class="score">4</span>
+								<span class="user clearfix"><h1>Don Mills Flyers</h1><h3>@donmillsflyers</h3></span>
+							</div>
+							<div class="right">
+								<span class="avatar"><a href="#" slidenum="9"><img src="images/titans.png" /></a></span>
+								<span class="score">2</span>
+								<span class="user clearfix"><h1>Toronto Titans</h1><h3>@toronto_titans</h3></span>
+							</div>
+						
+						</section>
+					
+					</div>			
+											
+				</section>
+								
+			</div>
+			
+			</div>
+		
+		<div slide="12">
+			
+				<!-- HEADER -->
+
+				<header class="profilehead">
+					<nav class="headnav">
+						<ul class="headnav">
+							<li class="headnav"><a href="#" slidenum="1">&#xe011;</a></li>
+							<li class="headnav">Game</li>
+							<li class="headnav"><a href="#" class="new">&#xe001;</a></li>
+						</ul>
+					</nav>
+				</header>
+				
+				<div class="feed">
+				
+				<section class="post game clearfix orientation">
+				
+					<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="9"><img src="images/titans.png" /></a></span>
+						<span class="score">4</span>
+						<span class="user clearfix"><h1>Toronto Titans</h1><h3>@toronto_titans</h3></span>
+					</div>
+					<div class="right">
+						<span class="avatar"><a href="#" slidenum="5"><img src="images/donmills.png" /></a></span>
+						<span class="score">1</span>
+						<span class="user clearfix"><h1>Don Mills Flyers</h1><h3>@donmillsflyers</h3></span>
+					</div>
+					
+				</section>
+
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@michaelbunting</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+						<p>Hit <a href="#" slidenum="7">@mark_mano</a> at 10:10 in the 3rd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+	
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@_marcobozzo</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+						<p>Shot on <a href="#" slidenum="7">@mark_mano</a> at 13:00 in the 3rd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+	
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@jake_maeyer</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="3"><img src="images/bunting.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Michael Bunting</h1><h3>@michaelbun...</h3></span>
+						<p>Received a 1 game suspension for a hit from behind at 18:34 in the 3rd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="6"><img src="images/bozzo.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Marco Bozzo</h1><h3>@_marcobozzo</h3></span>
+						<p>Scored a goal at 18:56 in the 3rd vs <a href="#" slidenum="5">@donmillsflyers</a></p>
+						<span class="assists">assisted by</span>
+						<span class="avatar assist"><a href="#" slidenum="8"><img src="images/manolescu.png" /></a></span>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@michaelbunting</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="2"><img src="images/joe.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Joseph Iantorno</h1><h3>@joetorno</h3></span>
+						<p>Received a 1 game suspension for unsportsmanlike conduct at 0:29 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+						<p>Scored a goal at 5:02 in the 2nd vs <a href="#" slidenum="9">@toronto_titans</a></p>
+						<span class="assists">assisted by</span>
+						<span class="avatar assist"><a href="#" slidenum="3"><img src="images/bunting.png" /></a></span><span class="avatar assist"><a href="#" slidenum="11"><img src="images/avatar.png" /></a></span>
+
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@_marcobozzo</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="8"><img src="images/manolescu.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Jake De Maeyer</h1><h3>@jake_maeyer</h3></span>
+						<p>Hit <a href="#" slidenum="3">@michaelbunting</a> at 10:01 in the 2nd vs. <a href="#" slidenum="5">@donmillsflyers</a></p>
+					</div>
+	
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="3"><img src="images/bunting.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Michael Bunting</h1><h3>@michaelbun...</h3></span>
+						<p>Took a tripping penalty at 10:56 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="8"><img src="images/manolescu.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Jake De Maeyer</h1><h3>@jake_maeyer</h3></span>
+						<p>Scored a goal at 12:57 in the 2nd vs <a href="#" slidenum="5">@donmillsflyers</a></p>
+						<span class="assists">assisted by</span>
+						<span class="avatar assist"><a href="#" slidenum="7"><img src="images/maeyer.png" /></a></span>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@jake_maeyer</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+						<p>Hit <a href="#" slidenum="6">@_marcobozzo</a> at 14:41 in the 2nd vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+	
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@harrylewis</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="3"><img src="images/bunting.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Michael Bunting</h1><h3>@michaelbun...</h3></span>
+						<p>Took a roughing penalty at 1:23 in the 1st vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@joetorno</span><span class="official"><img src="images/scorbit_official.png" /></span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="8"><img src="images/manolescu.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Jake De Maeyer</h1><h3>@jake_maeyer</h3></span>
+						<p>Scored a goal at 1:51 in the 1st vs <a href="#" slidenum="5">@donmillsflyers</a></p>
+					</div>
+				
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@maxfurs</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="6"><img src="images/bozzo.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Marco Bozzo</h1><h3>@_marcobozzo</h3></span>
+						<p>Took the puck away from <a href="#">@harrylewis</a> at 14:14 in the 1st vs. <a href="#" slidenum="5">@donmillsflyers</a></p>
+					</div>
+	
+				</section>
+				
+				<section class="post stat clearfix">
+				
+					<div class="topright"><span class="user">@joetorno</span></div>
+					<div class="left">
+						<span class="avatar"><a href="#" slidenum="4"><img src="images/maximfurs.png" /></a></span>
+					</div>
+					<div class="right">
+						<span class="user clearfix"><h1>Maxim Furs</h1><h3>@maxfurs</h3></span>
+						<p>Hit <a href="#" slidenum="6">@_marcobozzo</a> at 16:15 in the 1st vs. <a href="#" slidenum="9">@toronto_titans</a></p>
+					</div>
+	
+				</section>
+								
+				</div>
+			
+			</div>
+			
+			<img class="rink" src="images/rink.JPG" />
+			
+		</body>
+	</html>
