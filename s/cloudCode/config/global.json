@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "Scorbit": {
+            "applicationId": "p9tyT8nPxsJG9BxJYwF7mF30m71S4tegMWWqsoeB", 
+            "masterKey": "IC5xRUum5GO5JMFNqXapWYT6n174Q4MCVAM0Yr3W"
+        }, 
+        "_default": {
+            "link": "Scorbit"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.18"
+    }
+}
