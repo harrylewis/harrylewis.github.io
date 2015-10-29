@@ -13,13 +13,14 @@
 				$(function() {
 
 					$.ajax({
-			url: 'http://ontariobeerapi.ca/docs/api-docs/stores',
+			url: 'http://ontariobeerapi.ca/docs/stores',
 			method: 'GET',
 			dataType: 'json',
 			crossDomain: true
 		}).then(function(data) {
 			console.log(data);
 		});
+		console.log(true);
 					
 					$('li:nth-child(3)').click(function() {
 						var div = "<div class='create'></div>";
