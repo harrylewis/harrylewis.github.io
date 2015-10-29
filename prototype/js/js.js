@@ -25,5 +25,14 @@ $(function() {
 		}
 	
 	});
+
+	$.ajax({
+			url: 'http://ontariobeerapi.ca/docs/api-docs/stores',
+			method: 'GET',
+			dataType: 'json',
+			crossDomain: true
+		}).then(function(data) {
+			console.log(data);
+		});
 	
 });
