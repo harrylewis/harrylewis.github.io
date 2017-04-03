@@ -1,0 +1,136 @@
+// ----------------------------------------------------------------------------
+// This file contains test styles for development purposes.
+// ----------------------------------------------------------------------------
+
+.tidbit {
+  margin-bottom: 3em;
+}
+
+
+  .tidbit__icon {
+    font-family: "Icomoon" !important;
+    font-size: 2em;
+    margin-bottom: (1.5em/2);
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    display: block;
+    color: #FFFFFF;
+    @include font-smoothing(antialiased);
+  }
+
+
+  .tidbit__icon--carousel:before {
+    content: "\e8eb";
+  }
+
+
+  .tidbit__icon--trending-up:before {
+    content: "\e8e5";
+  }
+
+
+  .tidbit__icon--verified-user:before {
+    content: "\e8e8";
+  }
+
+
+  .tidbit__catch {
+    font-family: $text-font-stack;
+    font-size: 1.7em;
+    line-height: (2em/1.7);
+    font-weight: 400;
+    margin: 0;
+    margin-bottom: (1.5em/1.7);
+    color: #E6F0FA;
+    @include font-smoothing(antialiased);
+
+    & b {
+      font-weight: 500;
+      color: #FFFFFF;
+    }
+
+  }
+
+
+  .tidbit__description {
+    font-family: $text-font-stack;
+    font-size: 1.3em;
+    line-height: (2.3em/1.3);
+    font-weight: 400;
+    margin: 0;
+    color: #E6F0FA;
+    @include font-smoothing(antialiased);
+  }
+
+
+@media (min-width: 768px) {
+
+  .tidbit {
+    margin-bottom: 4em;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+  }
+
+
+    .tidbit__icon {
+      font-size: 3em;
+      margin-bottom: (2em/3);
+    }
+
+
+    .tidbit__catch {
+      font-size: 2em;
+      line-height: (2.4em/2);
+      margin-bottom: (2em/2);
+    }
+
+
+    .tidbit__description {
+      font-size: 1.5em;
+      line-height: (2.5em/1.5);
+    }
+
+}
+
+
+@media (min-width: 992px) {
+
+  .tidbit {
+    margin-bottom: 6em;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+  }
+
+
+    .tidbit__icon {
+      font-size: 5em;
+      margin-bottom: (2em/5);
+    }
+
+
+    .tidbit__catch {
+      font-size: 2.4em;
+      line-height: (2.9em/2.4);
+      margin-bottom: (2em/2.4);
+    }
+
+
+    .tidbit__description {
+      font-size: 1.8em;
+      line-height: (2.8em/1.8);
+    }
+
+}
+
+
+@media (min-width: 1200px) {}

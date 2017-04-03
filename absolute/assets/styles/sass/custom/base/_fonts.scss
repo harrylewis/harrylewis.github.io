@@ -1,0 +1,19 @@
+// ----------------------------------------------------------------------------
+// This file contains all imported fonts
+// ----------------------------------------------------------------------------
+
+// import montserrat
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700');
+
+
+// icon font
+@font-face {
+  font-family: "Icomoon";
+  src:  url('../../../fonts/icomoon/icomoon.eot?hmnf81');
+  src:  url('../../../fonts/icomoon//icomoon.eot?hmnf81#iefix') format('embedded-opentype'),
+    url('../../../fonts/icomoon/icomoon.ttf?hmnf81') format('truetype'),
+    url('../../../fonts/icomoon/icomoon.woff?hmnf81') format('woff'),
+    url('f../../../fonts/icomoon/icomoon.svg?hmnf81#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}

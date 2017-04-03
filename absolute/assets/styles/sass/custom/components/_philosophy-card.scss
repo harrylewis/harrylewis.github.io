@@ -1,0 +1,64 @@
+// ----------------------------------------------------------------------------
+// This file contains ...
+// ----------------------------------------------------------------------------
+
+.philosophy-card {
+  display: block;
+  padding: 3em 2em;
+  background: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.125);
+}
+
+
+  .philosophy-card__text {
+    font-family: $text-font-stack;
+    font-size: 1.5em;
+    line-height: (2.6em/1.5);
+    font-weight: 400;
+    margin: 0;
+    color: #8D97A0;
+    text-align: center;
+    @include font-smoothing(antialiased);
+  }
+
+
+@media (min-width: 768px) {
+
+  .philosophy-card {
+    padding: 6em 5em;
+  }
+
+
+    .philosophy-card__text {
+      font-size: 1.8em;
+      line-height: (2.9em/1.8);
+    }
+
+}
+
+
+@media (min-width: 992px) {
+
+  .philosophy-card {
+    padding: 6em 5em;
+  }
+
+
+    .philosophy-card__text {
+      font-size: 2.2em;
+      line-height: 1.5em;
+    }
+
+}
+
+
+@media (min-width: 1200px) {
+
+
+    .philosophy-card__text {
+      font-size: 2.2em;
+      line-height: (3.3em/2.2);
+    }
+
+}

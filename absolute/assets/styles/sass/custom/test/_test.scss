@@ -1,0 +1,149 @@
+// ----------------------------------------------------------------------------
+// This file contains test styles for development purposes.
+// ----------------------------------------------------------------------------
+
+
+.section__title {
+  font-family: $text-font-stack;
+  font-size: 2.2em;
+  line-height: (2.7em/2.2);
+  font-weight: 400;
+  margin: 0;
+  margin-bottom: (3em/2.2);
+  text-transform: uppercase;
+  @include font-smoothing(antialiased);
+}
+
+
+.section__title--dark {
+  color: #3C4650;
+}
+
+
+.section__title--light {
+  color: #FFFFFF;
+}
+
+
+.section__title--center {
+  text-align: center;
+}
+
+
+@media (min-width: 768px) {
+
+  .section__title {
+    font-size: 3em;
+    line-height: (3.7em/3);
+    margin-bottom: (4em/3);
+  }
+
+}
+
+
+@media (min-width: 992px) {
+
+  .section__title {
+    font-size: 3.6em;
+    line-height: (4.4em/3.6);
+    margin-bottom: (6em/3.6);
+  }
+
+}
+
+
+@media (min-width: 1200px) {}
+
+
+
+
+
+.ig__slot {
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+}
+
+
+  .ig__image {
+    display: block;
+    width: 100%;
+  }
+
+
+@media (min-width: 768px) {
+
+}
+
+
+@media (min-width: 992px) {
+
+}
+
+
+@media (min-width: 1200px) {
+
+}
+
+
+.image-grid--1200 {
+  display: none;
+}
+
+
+@media (min-width: 768px) {
+
+  .image-grid--1200 {
+    display: none;
+  }
+
+}
+
+
+@media (min-width: 992px) {
+
+  .image-grid--1200 {
+    display: none;
+  }
+
+}
+
+
+@media (min-width: 1200px) {
+
+}
+
+
+// .section--what-we-do {
+//   background: #0E70A0;
+//   -webkit-clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
+//   clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
+// }
+//
+//
+// .section--programs-and-camps {
+//   background: #F5F5F5;
+//   background-overflow
+//   -webkit-clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
+//   clip-path: polygon(0 0, 100% -10%, 100% 100%, 0 100%);
+// }
+
+
+// .d {
+//   position: absolute;
+//   top: -10%;
+//   background: #0E70A0;
+//   z-index: 0;
+//   height: 100%;
+//   width: 100%;
+//   clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
+// }
+//
+//
+// .bounds {
+//   border: 1px solid red;
+// }
+//
+// #section--instructors {
+//   display: relative;
+//   z-index: 10;
+// }

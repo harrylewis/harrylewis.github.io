@@ -1,0 +1,114 @@
+// ----------------------------------------------------------------------------
+// This file contains the styling definition for the instructor cards.
+// ----------------------------------------------------------------------------
+
+.instructor {
+  display: block;
+  padding: 2em;
+  margin-bottom: 2em;
+  border: 4px solid #E7E7E7;
+  border-radius: 3em 3em 3em 1em;
+}
+
+
+  .instructor__profile__avatar {
+    display: block;
+    float: left;
+    overflow: hidden;
+    height: 6em;
+    width: 6em;
+    margin-right: 1.5em;
+    border-radius: 3em;
+  }
+
+
+  .instructor__profile__id {
+    display: block;
+    float: left;
+    width: calc(100% - 7.5em);
+    padding: 1.1em 0;
+  }
+
+
+    .instructor__profile__id__name {
+      font-family: $text-font-stack;
+      font-size: 1.5em;
+      line-height: (1.9em/1.5);
+      font-weight: 500;
+      margin: 0;
+      margin-bottom: (0.3em/1.5);
+      color: #3C4650;
+      @include font-smoothing(antialiased);
+    }
+
+
+    .instructor__profile__id__role {
+      font-family: $text-font-stack;
+      font-size: 1.3em;
+      line-height: (1.6em/1.3);
+      font-weight: 400;
+      margin: 0;
+      color: #828C96;
+      @include font-smoothing(antialiased);
+    }
+
+
+  .instructor__bio {
+    font-family: $text-font-stack;
+    font-size: 1.3em;
+    line-height: (2.1em/1.3);
+    font-weight: 400;
+    margin: 0;
+    margin-top: (2em/1.3);
+    color: #828C96;
+    @include font-smoothing(antialiased);
+  }
+
+
+@media (min-width: 768px) {
+
+  .instructor {
+    padding: 3em;
+    margin-bottom: 3em;
+    border-radius: 3em 3em 3em 1em;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+  }
+
+}
+
+
+@media (min-width: 992px) {
+
+
+  .instructor__profile__id {
+    padding: 0.9em 0;
+  }
+
+
+    .instructor__profile__id__name {
+      font-size: 1.8em;
+      line-height: (2.2em/1.8);
+      margin-bottom: (0.1em/1.8);
+    }
+
+
+    .instructor__profile__id__role {
+      font-size: 1.6em;
+      line-height: (1.9em/1.6);
+    }
+
+
+  .instructor__bio {
+    font-size: 1.6em;
+    line-height: (2.4em/1.6);
+    margin-top: (1.2em/1.6);
+  }
+
+}
+
+
+@media (min-width: 1200px) {}
