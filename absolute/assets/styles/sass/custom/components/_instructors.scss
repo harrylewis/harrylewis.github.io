@@ -15,18 +15,18 @@
     display: block;
     float: left;
     overflow: hidden;
-    height: 6em;
-    width: 6em;
+    height: 10em;
+    width: 10em;
     margin-right: 1.5em;
-    border-radius: 3em;
+    border-radius: 2em 2em 2em 0.5em;
   }
 
 
   .instructor__profile__id {
     display: block;
     float: left;
-    width: calc(100% - 7.5em);
-    padding: 1.1em 0;
+    width: calc(100% - 11.5em);
+    padding-top: 3em;
   }
 
 
@@ -85,7 +85,7 @@
 
 
   .instructor__profile__id {
-    padding: 0.9em 0;
+    padding-top: 3em;
   }
 
 
