@@ -525,7 +525,8 @@
     font-size: 2.2em;
     line-height: 1.5em; } }
 .sponsor__bounds {
-  display: block; }
+  display: block;
+  margin: 0 auto; }
 
 .sponsor__logo {
   width: 100%; }
@@ -629,8 +630,7 @@
 
 @media (min-width: 768px) {
   .hero__logo {
-    height: 6em;
-    margin-bottom: 7.5em; }
+    height: 6em; }
 
   .hero__name {
     font-size: 6em;
@@ -643,8 +643,8 @@
     margin-bottom: 2.22222em; } }
 @media (min-width: 992px) {
   .hero__logo {
-    height: 7.5em;
-    margin-bottom: 7.5em; }
+    height: 10em;
+    margin-bottom: 9.5em; }
 
   .hero__name {
     font-size: 7.2em;
@@ -656,29 +656,45 @@
     line-height: 1.45455em;
     margin-bottom: 2.72727em; } }
 .section-bg--hero {
-  position: absolute;
-  top: 25%;
-  width: 100%;
-  height: 110%;
-  background-color: #F5F5F5;
-  background-image: url("../../../../assets/images/background/bg--hero--320.jpg");
-  background-repeat: no-repeat;
-  background-size: 100%;
+  background-image: url("../../../../assets/images/background/bg--sm.jpg");
   background-position: center center;
-  clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%); }
+  background-repeat: no-repeat;
+  background-size: 100%; }
 
+@media (min-width: 768px) {
+  .section-bg--hero {
+    background-image: url("../../../../assets/images/background/bg--sm.jpg");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: auto; } }
+@media (min-width: 992px) {
+  .section-bg--hero {
+    background-image: url("../../../../assets/images/background/bg--md.jpg");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: auto; } }
 @media (min-width: 1200px) {
   .section-bg--hero {
-    width: 100%;
-    height: 130%;
-    top: 10%;
-    background-position: center center;
-    background-size: auto;
-    background-image: url("../../../../assets/images/background/bg--hero--1200.jpg");
-    clip-path: polygon(0 25%, 100% 0, 100% 75%, 0 100%); } }
+    background-image: url("../../../../assets/images/background/bg.jpg");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: auto; } }
 .section--what-we-do {
   background: #0E70A0; }
 
+.section--what-we-do__text {
+  padding-top: 4em;
+  padding-bottom: 4em; }
+
+@media (min-width: 768px) {
+  .section--what-we-do__text {
+    padding-top: 20.6em; } }
+@media (min-width: 992px) {
+  .section--what-we-do__text {
+    padding-top: 31.3em; } }
+@media (min-width: 1200px) {
+  .section--what-we-do__text {
+    padding-top: 26.8em; } }
 .section--programs-and-camps {
   background: #F5F5F5; }
 
@@ -824,11 +840,11 @@
 
 .ig__image {
   display: block;
-  width: 100%; }
+  margin: 0 auto; }
 
-.image-grid--1200 {
-  display: none; }
-
+@media (min-width: 768px) {
+  .ig__image {
+    width: 100%; } }
 @media (min-width: 768px) {
   .image-grid--1200 {
     display: none; } }

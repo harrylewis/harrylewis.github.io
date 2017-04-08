@@ -66,11 +66,15 @@
 
   .ig__image {
     display: block;
-    width: 100%;
+    margin: 0 auto;
   }
 
 
 @media (min-width: 768px) {
+
+  .ig__image {
+    width: 100%;
+  }
 
 }
 
@@ -82,11 +86,6 @@
 
 @media (min-width: 1200px) {
 
-}
-
-
-.image-grid--1200 {
-  display: none;
 }
 
 
