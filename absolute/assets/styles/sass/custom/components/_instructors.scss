@@ -2,12 +2,79 @@
 // This file contains the styling definition for the instructor cards.
 // ----------------------------------------------------------------------------
 
+
+.section--instructors {
+  background-image: url("../../../images/background/bg--instructors.jpg");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 48em auto;
+}
+
+
+.section--instructors__text {
+  padding-top: 20em;
+}
+
+
+@media (min-width: 768px) {
+
+  .section--instructors {
+    background-image: url("../../../images/background/bg--instructors.jpg");
+    background-repeat: no-repeat;
+    background-position: center -2.5em;
+    background-size: 76.8em auto;
+  }
+
+
+  .section--instructors__text {
+    padding-top: 30em;
+  }
+
+}
+
+
+@media (min-width: 992px) {
+
+  .section--instructors {
+    background-image: url("../../../images/background/bg--instructors.jpg");
+    background-repeat: no-repeat;
+    background-position: center -5em;
+    background-size: 96em auto;
+  }
+
+
+  .section--instructors__text {
+    padding-top: 40em;
+  }
+
+}
+
+
+@media (min-width: 1200px) {
+
+  .section--instructors {
+    background-image: url("../../../images/background/bg--instructors.jpg");
+    background-repeat: no-repeat;
+    background-position: center -5em;
+    background-size: 96em auto;
+  }
+
+
+  .section--instructors__text {
+    padding-top: 40em;
+  }
+
+}
+
+
+
 .instructor {
   display: block;
   padding: 2em;
   margin-bottom: 2em;
   border: 4px solid #E7E7E7;
   border-radius: 3em 3em 3em 1em;
+  background: #FFFFFF;
 }
 
 
