@@ -1,1 +1,208 @@
-asfa
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Portfolio</title>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="mobile-menu-open" class="shadow-large">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+    <!-- End #mobile-menu-toggle -->
+    <header>
+        <div id="mobile-menu-close">
+            <span>Close</span> <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+        <ul id="menu" class="shadow">
+            <li>
+                <a href="#about">About</a>
+            </li>
+            <li>
+                <a href="#experience">Experience</a>
+            </li>
+            <li>
+                <a href="#education">Education</a>
+            </li>
+            <li>
+                <a href="#projects">Projects</a>
+            </li>
+            <li>
+                <a href="#skills">Skills</a>
+            </li>
+        </ul>
+    </header>
+    <!-- End header -->
+
+    <div id="lead">
+        <div id="lead-content">
+            <h1>Harry Lewis</h1>
+            <h2>Software Developer</h2>
+        </div>
+        <!-- End #lead-content -->
+
+        <div id="lead-overlay"></div>
+
+        <div id="lead-down">
+            <span>
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </span>
+        </div>
+        <!-- End #lead-down -->
+    </div>
+    <!-- End #lead -->
+
+    <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2 class="heading">About Me</h2>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                        I am a recent electrical engineering graduate, with extensive knowledge and passion for writing software. I have developed in many languages over the past few years, but have maintained focus in writing server-side Python, and using frontend technologies such as HTML, CSS, and JavaScript to create usable and attractive frontend experiences. Besides writing code, I love sports, and have played hockey for the past 15 years, and squash for the past 3 years. For the past 8 years, I have been teaching myself how to play piano and guitar, learning to play many classic rock songs, and Peanuts classics.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End #about -->
+
+    <div id="experience" class="background-alt">
+        <h2 class="heading">Experience</h2>
+        <div id="experience-timeline">
+            <div data-date="May 2016 – May 2017">
+                <h3>Semtech Corporation</h3>
+                <h4>Digital Design Intern</h4>
+                <p>
+                    Semtech Corporation is an analog/digital mixed-signal semiconductor desginer and manufacturer. I spent a year at their R&D faciliry in Ottawa developing an internal software regression tool in Python, and writing SystemVerilog hardware code to functionally verify a semiconductor chip designed to transform data from copper to fiber using a laser driver at gigabit speeds.
+                </p>
+            </div>
+
+            <div data-date="May 2012 – September 2015">
+                <h3>Scorbit</h3>
+                <h4>Software Developer</h4>
+                <p>
+                    Scorbit is a platform whose goal was to provide a free facility for anyone to track and broadcast sport event statistics in real-time at any level. As the sole developer, I was responsible for designing and developing a backend API, which was written in Python, using technologies like Redis, and PostgreSQL, and a frontend to use the API, written using web technologies like HTML, CSS, and JavaScript.
+                </p>
+            </div>
+
+            <div data-date="May 2017 – September 2017">
+                <h3>Absolute Hockey School</h3>
+                <h4>Web Designer/Developer</h4>
+                <p>
+                    The Absolute Hockey School is a skills-based hockey camp operating out of Newmarket, Ontario. I was contracted to redesign and redevelop the whole site from scratch. The site can be seen <a href="http://absolutehockeyschool.com" target="_blank">here</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- End #experience -->
+
+    <div id="education">
+        <h2 class="heading">Education</h2>
+        <div class="education-block">
+            <h3>Queen's University</h3>
+            <span class="education-date">September 2013 - May 2018</span>
+            <h4>Bachelor of Applied Science (B.A.Sc), Electrical Engineering </h4>
+            <p>
+                While attending Queen's University I maintained Dean's Distinction, taking electrical engineering courses ranging from analog electronics, to signal processing and wireless networks. Throughout my time held many roles outside of the classroom including being a teaching assistant for various 2nd and 3rd year courses, being a model for a non-profit organization called Project Red, and a peer supporter at a wellness center targeted at helping engineering students on campus.
+            </p>
+        </div>
+        <!-- End .education-block -->
+    </div>
+    <!-- End #education -->
+
+    <div id="projects" class="background-alt">
+        <h2 class="heading">Projects</h2>
+        <div class="container">
+            <div class="row">
+                <div class="project shadow-large">
+                    <div class="project-image">
+                        <img src="images/travel-advisory-bot-fb.jpg" />
+                    </div>
+                    <!-- End .project-image -->
+                    <div class="project-info">
+                        <h3>Canadian Travel Advisory Facebook Bot</h3>
+                        <p>
+                            I created the Canadian Travel Advisory Facebook Bot to help Canadians traveling to foreign countries stay up-to-date and informed about any precautions to take in these foreign countries, and to help them stay safe while abroad.
+                        </p>
+                        <a href="https://m.me/canadiantravelassistant" target="_blank">Communicate with Bot</a>
+                    </div>
+                    <!-- End .project-info -->
+                </div>
+                <!-- End .project -->
+
+                <div class="project shadow-large">
+                    <div class="project-image">
+                        <img src="images/python-logo.jpg" />
+                    </div>
+                    <!-- End .project-image -->
+                    <div class="project-info">
+                        <h3>UINames Python Package</h3>
+                        <p>
+                            UINames is an API that randomly generates locale-specific names, for use in UI/UX designs. While testing some Python projects of mine, I wanted to be able to use these generated names easily, and decided to create a Python wrapper for the API.
+                        </p>
+                        <a href="https://github.com/harrylewis/python-uinames" target="_blank">View Package</a>
+                    </div>
+                    <!-- End .project-info -->
+                </div>
+                <!-- End .project -->
+            </div>
+        </div>
+    </div>
+    <!-- End #projects -->
+
+    <div id="skills">
+        <h2 class="heading">Skills</h2>
+        <ul>
+            <li>Python</li>
+            <li>JavaScript</li>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>Git</li>
+            <li>SASS</li>
+            <li>C++</li>
+            <li>Backbone.js</li>
+        </ul>
+    </div>
+    <!-- End #skills -->
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5 copyright">
+                    <p>
+                        Copyright &copy; 2018 Harry Lewis
+                    </p>
+                </div>
+                <div class="col-sm-2 top">
+                    <span id="to-top">
+                        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="col-sm-5 social">
+                    <ul>
+                        <li>
+                            <a href="https://github.com/harrylewis" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End footer -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/scripts.min.js"></script>
+</body>
+
+</html>
